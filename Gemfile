@@ -21,3 +21,7 @@ end
 gem 'jquery-rails'
 gem 'activeadmin'
 gem 'heroku'
+gem 'devise'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'faker'
