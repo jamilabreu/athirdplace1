@@ -1,0 +1,11 @@
+var $container = $('#users');
+var $newUsers = $('<%= j render @users %>')
+$container.isotope( 'insert', $newUsers );
+$container.imagesLoaded( function(){
+	$container.isotope('reLayout')
+});
+<% if @users.current_page < @users.num_pages %>
+	$('.pagination').replaceWith('<%= j paginate @users %>');
+<% else %>
+	$('.pagination').remove();
+<% end %>

@@ -1,5 +1,4 @@
 Jamilabreu::Application.routes.draw do
-  
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
 
@@ -9,11 +8,15 @@ Jamilabreu::Application.routes.draw do
     get "login", :to => "devise/sessions#new"
     get "logout", :to => "devise/sessions#destroy"
     get "register", :to => "devise/registrations#new"
-    get "edit", :to => "devise/registrations#edit"
+    get "edit", :to => "users#edit"
   end
-  resources :users  
+  resources :users
+  resources :communities do
+    resources :users
+  end
   
-  root :to => 'pages#index'
+  match '', to: 'users#index', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
+  root :to => 'communities#index'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

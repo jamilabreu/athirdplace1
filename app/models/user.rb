@@ -1,10 +1,27 @@
 class User < ActiveRecord::Base
+  has_many :community_users, :dependent => :destroy
+  has_many :communities, :through => :community_users
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and , :validatable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation, :remember_me
+  
+  def communities_filtered_by(community_type)
+    communities.filtered_by(community_type.titleize)
+  end
+  
+  def community_length(community_type)
+    length = communities_filtered_by(community_type).length
+    "+#{length - 1}" if length > 1
+  end
+  
+  def sample(community_type)
+    array = communities_filtered_by(community_type)
+    array.sample.name if array.present? 
+  end
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     data = access_token.extra.raw_info

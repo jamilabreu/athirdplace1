@@ -80,3 +80,18 @@
 	-ms-transform-origin:$origin;
 	transform-origin:$origin;
 }
+
+/* Apply a CSS3 transition-property and duration */
+
+@mixin transition-property-duration($duration: 0.15s) {
+	-webkit-transition-property: box-shadow, border;
+	-moz-transition-property: box-shadow, border;
+	-ms-transition-property: box-shadow, border;
+	-o-transition-property: box-shadow, border;
+	transition-property: box-shadow border;
+	-webkit-transition-duration: $duration;
+	-moz-transition-duration: $duration;
+	-ms-transition-duration: $duration;
+	-o-transition-duration: $duration;
+	transition-duration: $duration;
+}

@@ -1,8 +1,14 @@
-<div class="user">
-	<%= image_tag user.image, :title => user.name, :class => "user_image" %>
-	<div class="user_info">	
-		<div class="user_name">
-			<%= user.first_name %>
+<div class="user <% if home_page %>home_user<% end %>">
+	<%= link_to user_path(user), :remote => true do %>
+		<%= image_tag user.large_image, :title => user.name, :class => "user_image" %>
+		<div class="user_box">	
+			<div class="user_name"><%= user.first_name %></div>
+			<div class="user_fields" id="user_fields_<%= user.id %>"><%= user.sample("field") %> <%= user.community_length("field") %></div>
 		</div>
-	</div>
+	<% end %>
+		<div class="user_profile" id="user_profile_<%= user.id %>">
+			<div class="user_about"><%= user.about %></div>
+			<div class="user_schools"><%= user.sample("school") %> <%= user.community_length("school") %></div>
+			<%= user.communities.map(&:name) %>
+		</div>
 </div>

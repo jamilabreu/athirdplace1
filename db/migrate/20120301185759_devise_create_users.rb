@@ -47,6 +47,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string  :twitter_name
       t.string  :gender
       t.string  :profile_url
+      t.string  :about
             
       t.timestamps
     end

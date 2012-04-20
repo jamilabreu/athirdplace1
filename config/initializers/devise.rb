@@ -216,7 +216,7 @@ Devise.setup do |config|
   require "omniauth-twitter"
   
   if Rails.env.development?
-  config.omniauth :facebook, '297122913675912', '59204fd0ce812c58655f5badb4114b76', :scope => 'email', :display => 'popup'
+  config.omniauth :facebook, '297122913675912', '59204fd0ce812c58655f5badb4114b76', :scope => 'email', :display => 'page'
   else
   config.omniauth :facebook, '297122913675912', '59204fd0ce812c58655f5badb4114b76',
       {:scope => 'email', :client_options => {:ssl => {:ca_file => '/usr/lib/ssl/certs/ca-certificates.crt'}}} 

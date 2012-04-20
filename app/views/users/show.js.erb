@@ -1,0 +1,7 @@
+if ( $("#user_profile_<%= @user.id %>").is(":visible") ) { 
+	$("#user_fields_<%= @user.id %>").html("<%= @user.sample('field') %> <%= @user.community_length('field') %>");
+} else {
+	$("#user_fields_<%= @user.id %>").html("<% @user.communities_filtered_by('field').each do |x| %><%= x.name %><BR><% end %>");	
+}
+$("#user_profile_<%= @user.id %>").toggle();
+$('#users').isotope('reLayout');

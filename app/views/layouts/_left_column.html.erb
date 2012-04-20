@@ -1,0 +1,18 @@
+<div class="left_column_holder">
+	<div class="left_column">
+		
+		<ul><%= link_to "All", root_url %></ul>	
+		
+		<% @filters.each do |key, value| %>
+			<div class="filter_title"><%= key %></div>
+			<ul>
+			<% value.each do |community| %>
+				<%= link_to root_path(ids: selected?(community) ? (params[:ids] - [community.id.to_s]) : (params[:ids].to_a | [community.id.to_s])), :class => selected?(community) ? "selected" : nil do %>
+				<li><%= community.name %><% if selected?(community) %><i class="icon-remove icon-white"></i><% end %></li>
+				<% end %>
+			<% end %>
+			</ul>
+		<% end %>
+		
+	</div>
+</div>

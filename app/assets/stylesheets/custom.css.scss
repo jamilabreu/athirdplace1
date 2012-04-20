@@ -1,14 +1,86 @@
 @import "mixins";
 
 /* Variables */
-$red: #C51920;
+$black: #363636;
+$red: #B83B3B;
+$dkred: #931e1e;
 
 html, html a { -webkit-font-smoothing: antialiased; text-shadow: 1px 1px 1px rgba(0,0,0,0.004); }
-html a { font-weight: bold;  text-decoration: none; }
+a { text-decoration: none; font-weight: bold; }
 a:hover { text-decoration: none; }
-ul, ol { margin: 0 }
-body { padding-top: 60px; }
+ul, ol { margin: 0; list-style: none; }
+body { padding-top: 60px; font-family: "proxima-nova", Georgia, sans-serif; font-size: 14px; color: $black; background: url("bg.gif"); }
 
-.navbar { }
-.navbar-inner { background: black; }
-.brand { }
+.container, .navbar-fixed-top .container { width: 1020px; }
+
+/* Header */
+.navbar-inner { background: $black;  height: 33px; }
+.navbar-inner .container { }
+
+.navbar .nav { }
+.navbar .nav > li > a { padding: 6px 15px 7px; line-height: 19px; }
+.navbar .nav > li > a:hover { background: #2F2F2F !important; color: #999; }
+.navbar .nav > li > a.active { background: #444; color: #FFF; @include border-radius(0px); }
+.navbar .nav > li > a.active:hover { background: #444 !important; }
+
+.navbar .brand { padding: 7px 0 7px 0; margin-left: 0; font-size: 14px; font-weight: bold; line-height: 19px; color: #999; 
+	width: 142px; margin-right: 20px; text-align: center; color: #FFF; }
+.navbar .brand i { line-height: 14px; position: relative; top: 1px; }
+
+.navbar .nav > li > a.logo { color: #FFF; padding-left: 0; }
+.navbar .nav > li > a.logo:hover { background: $black !important; }
+.navbar .nav > li > a.logo i { color: #999; }
+
+.navbar .divider-vertical { height: 33px; margin: 0; border: 0; background: $black; }
+
+.right_nav { float: right; margin-right: 37px; }
+.right_nav i { line-height: 14px; font-size: 15px; position: relative; top: 1px; }
+.right_nav a { display: inline-block; padding: 7px 15px; line-height: 19px; }
+
+.facebook_login { color: #FFF; background: #3b5998; }
+.facebook_login:hover { background: #336699; color: #FFF; }
+
+/* Home */
+.home { margin-top: -22px; }
+.home_hero { background: #FFF; padding: 15px 20px; color: #999; border: 1px solid #D9D4D4; @include custom-border-radius(0,0,3px,3px);}
+.home_communities { background: #C44545; @include border-radius(3px); color: $dkred; padding: 10px 20px; margin-top: 20px; }
+.home_communities ul { margin-bottom: 10px; }
+.home_communities ul a { color: #FFF; }
+.home_users { width: 1020px; margin-top: 20px; background: #DDD}
+
+
+.home_hero a { color: $black; }
+.categories { border: 1px solid #DDD; width: 120px; @include border-radius(3px); padding: 2px 7px; }
+.communities { float: left; width: 160px; }
+.communities a { color: blue; padding: 0 0 0 0; }
+.toggle_communities { display: block; }
+
+/* Left Column */
+.left_column_holder { width: 140px; background: #FFF; padding: 1px; z-index: 2000; @include border-radius(3px); 
+	@include box-shadow(0,0,4px,0,rgba(0, 0, 0, 0.05));}
+.left_column { background: #C44545; display: block; text-transform: capitalize;  padding: 10px 0 0 6px; @include border-radius(3px); }
+.left_column ul { list-style: none; padding-bottom: 8px; border-bottom: 1px solid $dkred; &:last-child { border-bottom: none; } }
+.left_column ul a { display: block; color: white; font-weight: bold; padding: 1px 2px 1px 6px; @include custom-border-radius(3px,0,0,3px); }
+.left_column ul a:hover { background: $dkred; color: white; }
+.left_column ul i { float: right; margin-top: 1px; line-height: 16px; }
+
+.selected { background: #2D2D2D; color: white !important; margin-bottom: 1px; } 
+.selected:hover { background: #2A2A2A !important; }
+.filter_title { font-family: "franklin-gothic-urw",sans-serif; color: $dkred; font-size: 13px; font-weight: bold; text-transform: uppercase; }
+
+/* User */
+#users { }
+.user { width: 185px; padding: 5px; margin: 0 12px 12px 0; border: 1px solid #D9D4D4; background: #FFF; @include border-radius(3px); 
+	@include box-shadow(0,1px,3px,0,rgba(0, 0, 0, 0.05));}
+.user img { width: 185px; }
+.user_box { padding: 5px 5px 0; border-top: 1px solid #FFF; color: #999; @include linear-gradient(#F8F8F8, #FFF, false, $start: right); }
+.user_name { font-weight: bold; color: $black; }
+.user_fields { font-weight: normal; }
+.user_profile { display: none; }
+.user_about { font-size: 13px; margin: 5px 0; padding: 10px; border-top: 1px solid #EEE; border-bottom: 1px solid #EEE; }
+.user_schools { background: #f8f8f8; padding: 5px; @include linear-gradient(#F8F8F8, #FFF, false, $start: right); }
+
+
+
+.home_user { margin: 0 7px 7px 0; }
+

@@ -1,0 +1,12 @@
+<div class="span13">
+	<div class="home">
+		<div class="home_hero">
+			<h4>"a third place" is an informal meeting space for building community beyond the home or workplace.<h4>
+			<%= link_to "Dominicans", root_url(subdomain: "dominican") %>
+		</div>
+		<div class="home_users" id="users">
+			<%= render @users %>
+		</div>
+		<%= paginate @users %>
+	</div>
+</div>

@@ -1,0 +1,4 @@
+<li>
+	<%= link_to community.name, root_url(subdomain: community.subdomain) %> 
+	<span><%=  community.children.map{|c| c.users.length}.inject(community.users.length, :+) %></span>
+</li>

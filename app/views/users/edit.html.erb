@@ -1,0 +1,17 @@
+<h2><%= @user.first_name %></h2>
+<%= form_for @user, :html => { :class => "form-inline" } do |f| %>
+	
+	<div class="field multiple_field">
+		<label>Gender</label>
+		<%= f.collection_select(:community_ids, Community.where("communities.community_type = 'Gender'"), :id, :name, {}, {'data-placeholder' => 'Select gender', :class => 'chzn-select', :multiple => true}) %>
+	</div>
+	
+	<div class="field multiple_field">
+		<label>Culture</label>
+		<%= f.collection_select(:community_ids, Community.where("communities.community_type = 'Culture'"), :id, :name, {}, {'data-placeholder' => 'Select Culture', :class => 'chzn-select', :multiple => true, :selected => current_user.community_ids }) %>
+	</div>
+	
+	<div class="form-actions">
+		<%= f.submit "Update Profile", :class => "btn btn-inverse" %>
+  </div>
+<% end %>
