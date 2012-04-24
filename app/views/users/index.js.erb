@@ -1,6 +1,5 @@
 var $container = $('#users');
-var $newUsers = $('<%= j render @users %>')
-$container.isotope( 'insert', $newUsers );
+$container.isotope( 'insert', $('<%= j render @users %>') );
 $container.imagesLoaded( function(){
 	$container.isotope('reLayout')
 });

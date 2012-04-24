@@ -3,5 +3,5 @@ if ( $("#user_profile_<%= @user.id %>").is(":visible") ) {
 } else {
 	$("#user_fields_<%= @user.id %>").html("<% @user.communities_filtered_by('field').each do |x| %><%= x.name %><BR><% end %>");	
 }
-$("#user_profile_<%= @user.id %>").toggle();
+$("#user_profile_<%= @user.id %>, #user_more_<%= @user.id %>").toggle();
 $('#users').isotope('reLayout');

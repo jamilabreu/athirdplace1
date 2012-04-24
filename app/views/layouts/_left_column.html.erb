@@ -16,3 +16,6 @@
 		
 	</div>
 </div>
+<% unless user_signed_in? && current_user.subscribed? %>
+<div class="more_filters"><%= link_to new_subscription_path do %><i class="icon-asterisk"></i>get more filters<% end %>	</div>
+<% end %>

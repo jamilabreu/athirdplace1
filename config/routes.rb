@@ -14,8 +14,10 @@ Jamilabreu::Application.routes.draw do
   resources :communities do
     resources :users
   end
+  resources :subscriptions
   
   match '', to: 'users#index', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
+  match 'newsletter' => 'subscriptions#index', :as => :newsletter
   root :to => 'communities#index'
   
   # The priority is based upon order of creation:

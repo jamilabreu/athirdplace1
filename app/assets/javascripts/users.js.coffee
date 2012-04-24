@@ -1,4 +1,11 @@
 jQuery ->
+	# Isotope
+	container = $('#users')
+	container.imagesLoaded ->
+		container.isotope
+		  itemSelector : '.user'
+	
+	# Infinite Scroll
 	isScrolledIntoView = (elem) ->
 		docViewTop = $(window).scrollTop()
 		docViewBottom = docViewTop + $(window).height()
@@ -13,3 +20,18 @@ jQuery ->
 	      $('.pagination').text('Fetching more...')
 	      $.getScript(url)
 	  $(window).scroll()
+	
+	# Edit User Form
+	$('#user_standing').live 'change', () ->
+		if $('#user_standing').val() is "3"
+			$('#alumni_fields').hide()
+			$("#user_degree").val("6") 
+			$("#user_degree").trigger("liszt:updated")
+		else if $('#user_standing').val() is "4"
+			$('#alumni_fields').show()
+			$("#user_degree").val("8")
+			$("#user_degree").trigger("liszt:updated")
+		else
+			$('#alumni_fields').show()
+			$("#user_degree").val("7")
+			$("#user_degree").trigger("liszt:updated")

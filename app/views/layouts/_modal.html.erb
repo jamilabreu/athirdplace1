@@ -1,0 +1,34 @@
+<div class="modal hide fade" id="myModal">
+  <div class="modal-header">
+    <!--<a class="close" data-dismiss="modal">×</a>-->
+    <i class="icon-asterisk"></i><%= @community ? "#{@community.name} Student + Alumni Network" : "Home" %>
+  </div>
+  <div class="modal-body">
+			<div class="modal-about">
+				<span>a filterable directory and monthly newsletter for students + alumni</i>
+		</span>
+		</div>
+		<!--<div class="modal-heading">
+		<%#= render :partial => "users/user_sm", :collection => User.all.sample(3), :as => :user %><span>Let's get organized.</span><%#= render :partial => "users/user_sm", :collection => User.all.sample(3), :as => :user %>
+		</div>-->
+	
+
+
+		
+  </div>
+  <div class="modal-footer">
+		<div class="modal-login">
+	    <%= link_to "#{request.protocol + request.domain}/users/auth/facebook", :class => "facebook_login" do %>
+				<i class="icon-facebook-sign"></i>Sign In with Facebook<%#= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %>
+			<% end %>
+		</div>
+
+    <!--<a href="#" class="btn">Close</a>
+    <a href="#" class="btn btn-primary">Save changes</a>-->
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+	//$('#myModal').modal('toggle')
+	$('#myModal').modal({ keyboard: false, backdrop: "static" });
+</script>

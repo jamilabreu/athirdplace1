@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_filter :load_community
   
   def index
     params[:seed] ||= Random.new_seed
@@ -17,7 +16,7 @@ class UsersController < ApplicationController
     
     users_community_ids  = @users.map(&:community_ids).flatten.uniq.compact.delete_if { |id| id == @community.id || id == @community.parent_id }
     @filters = {}
-    categories = %w[ gender standing degree field school ethnicity ]
+    categories = current_user && current_user.subscribed? ? %w[ gender standing degree field school orientation religion ethnicity ] : %w[ gender standing field ]
     categories.each do |c|
      @filters[c] = Community.where("communities.id IN (?)", users_community_ids & Community.filtered_by(c).map(&:id))
     end
@@ -33,6 +32,10 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(current_user.id)
+    #params[:user][:community_ids].concat(params[:user][:communities])
+    #params[:user][:communities].each { |x| params[:user][:community_ids] << x  }
+    #params[:user].delete :community_users_attributes
+    
     if @user.update_attributes(params[:user])
       redirect_to root_path
     else

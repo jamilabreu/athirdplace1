@@ -1,17 +1,109 @@
-<h2><%= @user.first_name %></h2>
-<%= form_for @user, :html => { :class => "form-inline" } do |f| %>
+<div class="offset1 span10">
+	<div class="section edit_user">
+	<h2><%= image_tag @user.image, :class => "edit_user_image" %><%= @user.first_name %></h2>
+	<%= form_for @user, :html => { :class => "form-inline" } do |f| %>
 	
-	<div class="field multiple_field">
-		<label>Gender</label>
-		<%= f.collection_select(:community_ids, Community.where("communities.community_type = 'Gender'"), :id, :name, {}, {'data-placeholder' => 'Select gender', :class => 'chzn-select', :multiple => true}) %>
+		<% %W[ gender standing degree city].each do |name| %>
+			<div class="field <%= "hidden" if name == "gender" && current_user.gender.present? %>">
+				<label><%= name == "city" ? "Current City" : name.titlecase %></label>
+				<%= f.collection_select("#{name}_ids".to_sym, Community.filtered_by("#{name}").sort_by{|c| c.name}, :id, :name, {:include_blank => true, :selected => @community && name == "city" ? current_user.community_ids << @community.id : (current_user.communities_filtered_by("#{name}").blank? ? [3,6] : current_user.community_ids)}, {'data-placeholder' => "Select #{name.titlecase}", :class => 'chzn-select', :id => "user_#{name}"}) %>
+			</div>
+		<% end %>
+		
+		<% %W[ field school ethnicity ].each do |name| %>
+			<div class="field multiple_field">
+				<label><%= "#{name.titlecase}" %></label>
+				<%= f.collection_select("#{name}_ids".to_sym, Community.filtered_by("#{name}").sort_by{|c| c.name}, :id, :name, {:include_blank => true, :selected => @community ? current_user.community_ids << @community.id : current_user.community_ids}, {'data-placeholder' => "Select #{name.titlecase}(s) #{'of Experience' if name == 'field'}", :class => 'chzn-select', :id => "user_#{name}", :multiple => true}) %>
+			</div>
+		<% end %>
+		
+		<div id="alumni_fields" class="<%= current_user.standing.first == 'Undergrad' ? 'hidden' : nil  %>">
+			<div class="field">
+				<label>Job Title</label><%= f.text_field :title %>
+			</div>
+			<div class="field">
+				<label>Company</label><%= f.text_field :company %>
+			</div>
+		</div>
+
+		<div class="field">
+			<label>Short Bio</label><%= f.text_area :about, :placeholder => "Share your story (140 characters)"  %>
+		</div>
+
+		<div class="field">
+			<label>Twitter</label><%= f.text_field :twitter_name, :placeholder => "Username" %>
+		</div>
+
+		<div class="field">
+			<label>Blog</label><%= f.text_field :blog_url, :placeholder => "Blog URL ( http://... )" %>
+		</div>	
+	<!--
+			<%# if current_user.gender.blank? %>
+			<div class="field">
+				<label>Gender</label>
+				<%#= f.collection_select(:community_ids, Community.filtered_by("Gender"), :id, :name, {}, {'data-placeholder' => 'Select Gender', :class => 'chzn-select', :id => 'community_ids_gender'}) %>
+			</div>
+			<%# end %>
+			<div class="field">
+				<label>Standing</label>
+				<%#= f.collection_select(:community_ids, Community.filtered_by("Standing"), :id, :name, {:include_blank => true}, {'data-placeholder' => 'Select Standing', :class => 'chzn-select', :id => 'community_ids_standing'}) %>
+			</div>
+				
+			<div class="field">
+				<label>Degree</label>
+				<%#= f.collection_select(:community_ids, Community.filtered_by("Degree"), :id, :name, {:include_blank => true}, {'data-placeholder' => 'Select Degree Type', :class => 'chzn-select', :id => 'community_ids_degree'}) %>
+			</div>
+			
+			<div class="field">
+				<label>Current City</label>
+				<%#= f.collection_select(:community_ids, Community.filtered_by("City"), :id, :name, {:include_blank => true}, {'data-placeholder' => 'Select Current City', :class => 'chzn-select', :id => 'community_ids_city'}) %>
+			</div>
+										
+			<div class="field multiple_field">
+				<label>Field(s)</label>
+				<%#= f.collection_select(:community_ids, Community.filtered_by("Field"), :id, :name, {}, {'data-placeholder' => nil, :class => 'chzn-select', :id => 'community_ids_field', :multiple => true}) %>
+			</div>
+
+			<div class="field multiple_field">
+				<label>School(s)</label>
+				<%#= f.collection_select(:community_ids, Community.filtered_by("School"), :id, :name, {}, {'data-placeholder' => 'School(s) Attended', :class => 'chzn-select', :id => 'community_ids_school', :multiple => true}) %>
+			</div>
+	
+			<div class="field multiple_field">
+				<label>Ethnicity</label>
+				<%#= f.collection_select(:community_ids, Community.filtered_by("Ethnicity"), :id, :name, {}, {'data-placeholder' => nil, :class => 'chzn-select', :id => 'community_ids_ethnicity', :multiple => true, :selected => 2 }) %>
+			</div>
+			
+			<div id="alumni_fields">
+				<div class="field">
+					<label>Job Title</label>
+					<%#= f.text_field :title %>
+				</div>
+				<div class="field">
+					<label>Company</label>
+					<%#= f.text_field :company, :placeholder => "Name" %>
+				</div>
+
+			</div>
+			
+			<div class="field">
+				<label>Short Bio</label>
+				<%#= f.text_area :about %>
+			</div>
+	
+			<div class="field">
+				<label>Twitter</label>
+				<%#= f.text_field :twitter_name, :placeholder => "Username" %>
+			</div>
+			
+			<div class="field">
+				<label>Blog</label>
+				<%#= f.text_field :blog_url, :placeholder => "Blog URL ( http://... )" %>
+			</div>
+			-->
+			<div class="form-actions">
+				<%= f.submit "Update Profile", :class => "btn btn-inverse" %>
+		  </div>
+		<% end %>
 	</div>
-	
-	<div class="field multiple_field">
-		<label>Culture</label>
-		<%= f.collection_select(:community_ids, Community.where("communities.community_type = 'Culture'"), :id, :name, {}, {'data-placeholder' => 'Select Culture', :class => 'chzn-select', :multiple => true, :selected => current_user.community_ids }) %>
-	</div>
-	
-	<div class="form-actions">
-		<%= f.submit "Update Profile", :class => "btn btn-inverse" %>
-  </div>
-<% end %>
+</div>

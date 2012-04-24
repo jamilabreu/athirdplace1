@@ -48,6 +48,9 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string  :gender
       t.string  :profile_url
       t.string  :about
+      t.string  :company
+      t.string  :title
+      t.string  :blog_url
             
       t.timestamps
     end

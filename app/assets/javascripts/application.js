@@ -15,19 +15,8 @@
 //= require_tree .
 
 $(function() {
-	
 	$(".notice, .alert").fadeOut(3000);
 	
 	//Chosen
-	$(".chzn-select").chosen();
-
-	//Isotope + I-Scroll
-	var $container = $('#users');
-	
-	$container.imagesLoaded( function(){
-		$container.isotope({
-		  itemSelector : '.user'
-		});
-	});
-			
+	$(".chzn-select").chosen();	
 });

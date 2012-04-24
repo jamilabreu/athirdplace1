@@ -26,7 +26,8 @@
 		<%= yield %>
 	</div>
 </div>
+<%= render "layouts/modal" unless user_signed_in? %>
 <%#= render "layouts/analytics" if Rails.env.production? %>
-<%= debug(params) if Rails.env.development? %>
+<%#= debug(params) if Rails.env.development? %>
 </body>
 </html>

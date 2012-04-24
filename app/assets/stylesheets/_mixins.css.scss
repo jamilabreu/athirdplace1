@@ -26,10 +26,10 @@
 }
 
 /* Apply an inset CSS3 box-shadow: @include inset-box-shadow(5px, 5px, 10px, #000); */
-@mixin inset-box-shadow($x: 5px, $y: 5px, $blur: 10px, $spread: 10px, $color: #000) {
-	-webkit-box-shadow: inset $x $y $blur $spread $color;
-       -moz-box-shadow: inset $x $y $blur $spread $color;
-	        box-shadow: inset $x $y $blur $spread $color;
+@mixin inset-box-shadow($x: 5px, $y: 5px, $blur: 10px, $spread: 10px, $color: #000, $xx: 5px, $yy: 5px, $bblur: 10px, $sspread: 10px, $ccolor: #000 ) {
+	-webkit-box-shadow: inset $x $y $blur $spread $color, inset $xx $yy $bblur $sspread $ccolor;
+       -moz-box-shadow: inset $x $y $blur $spread $color, inset $xx $yy $bblur $sspread $ccolor;
+	        box-shadow: inset $x $y $blur $spread $color, inset $xx $yy $bblur $sspread $ccolor;
 }
 
 /*

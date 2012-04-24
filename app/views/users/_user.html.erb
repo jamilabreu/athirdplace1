@@ -6,9 +6,22 @@
 			<div class="user_fields" id="user_fields_<%= user.id %>"><%= user.sample("field") %> <%= user.community_length("field") %></div>
 		</div>
 	<% end %>
+		<div class="user_more" id="user_more_<%= user.id %>">
+			<div class="user_schools"><% user.school.each do |school| %><%= school %><BR><% end %></div>
+			<div class="user_standing"><%= user.standing.join %></div>
+			<div class="user_degree"><%= "#{user.degree.join}"%></div>
+		</div>
 		<div class="user_profile" id="user_profile_<%= user.id %>">
-			<div class="user_about"><%= user.about %></div>
-			<div class="user_schools"><%= user.sample("school") %> <%= user.community_length("school") %></div>
-			<%= user.communities.map(&:name) %>
+			<% if user.subscribed? %>
+				<div class="user_about"><%= user.about %></div>
+				
+				<%#= user.communities.map(&:name) %>
+			<% else %>
+				
+				<div class="user_subscribe">
+				<%= link_to new_subscription_path(:referral => user.id) do %>
+					<i class="icon-asterisk"></i>More About <%= user.first_name %>
+				<% end %></div>
+			<% end %>
 		</div>
 </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120416144414) do
+ActiveRecord::Schema.define(:version => 20120420192326) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -67,6 +67,17 @@ ActiveRecord::Schema.define(:version => 20120416144414) do
   add_index "community_users", ["community_id"], :name => "index_community_users_on_community_id"
   add_index "community_users", ["user_id"], :name => "index_community_users_on_user_id"
 
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "plan_id"
+    t.string   "description"
+    t.string   "stripe_customer_token"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -90,6 +101,9 @@ ActiveRecord::Schema.define(:version => 20120416144414) do
     t.string   "gender"
     t.string   "profile_url"
     t.string   "about"
+    t.string   "company"
+    t.string   "title"
+    t.string   "blog_url"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end

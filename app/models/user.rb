@@ -1,6 +1,8 @@
-class User < ActiveRecord::Base
+class User < ActiveRecord::Base  
   has_many :community_users, :dependent => :destroy
   has_many :communities, :through => :community_users
+  # accepts_nested_attributes_for :community_users
+  # attr_writer :community_gender_ids, :community_standing_ids
   
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and , :validatable
@@ -23,6 +25,23 @@ class User < ActiveRecord::Base
     array.sample.name if array.present? 
   end
   
+  def subscribed?
+    Subscription.find_by_user_id(id).present?
+  end
+  
+  %W[ gender standing degree city field school ethnicity ].each do |name|
+    define_method "#{name}" do
+      self.communities.filtered_by("#{name}").map(&:name)
+    end
+    define_method "#{name}_ids" do
+      self.communities.filtered_by("#{name}").map(&:id)
+    end
+    define_method "#{name}_ids=" do |val|
+      self.communities.delete_all if name == "gender"
+      self.community_ids += val.class == Array ? val : [val]
+    end
+  end
+  
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     data = access_token.extra.raw_info
     if user = User.where(:email => data.email).first
@@ -42,8 +61,8 @@ class User < ActiveRecord::Base
         :last_name => data.last_name,
         :image => access_token.info.image,
         :large_image => "http://graph.facebook.com/#{data.id}/picture?type=large",
-        :gender => data.gender.capitalize,
-        :profile_url => data.link
+        :profile_url => data.link,
+        :community_ids => data.gender.capitalize == "Male" ? ["1"] : ["2"]
         )   
     end
   end

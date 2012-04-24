@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   include UrlHelper
   protect_from_forgery
   
+  before_filter :load_community
+  
   def authenticate_admin_user!
     current_user.email == "abreu.jamil@gmail.com"
   end
