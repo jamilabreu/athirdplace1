@@ -135,15 +135,15 @@ form { margin: 0; }
 .form-horizontal .form-actions { padding-left: 10px; }
 
 /* Modal */
-.modal h3 { background: #FFF; color: #666; position: relative; top: 18px; display: inline-block; padding: 0 10px; font-size: 19px; font-weight: 400; }
+.modal h3 { background: #FFF; color: #666; position: relative; top: 18px; display: inline-block; padding: 0 8px; font-size: 19px; font-weight: 400; }
 .modal { padding: 0; background: #FFF; text-align: center;}
-.modal-header { color: #222; font-size: 18px; font-weight: bold; border-bottom: 1px dotted #CCC; padding: 5px 0; margin: 0 10px; }
-.modal-users { margin-top: 35px; padding-left: 1px }
+.modal-header { color: #222; font-size: 18px; font-weight: bold; border-bottom: 1px dotted #CCC; padding: 5px 0; margin: 0 8px; }
+.modal-users { margin-top: 35px; padding-left: 1px; }
 
 .modal-body { padding: 0; margin: 40px 15px 20px; }
 
-.modal-about { background: #F2F0F0; font-weight: bold; color: #AD9C9C; padding: 18px 0; }
-.modal-about a { color: #BBB; }
+.modal-about { background: #F2F0F0; font-weight: bold; color: #AD9C9C; padding: 18px 0; margin: 2px 0 0; @include custom-border-radius(0,0,3px,3px);}
+.modal-about a { color: #AD9C9C; }
 .modal-about a:hover { color: $red; }
 .modal-about i { position: relative; top: 1px; }
 

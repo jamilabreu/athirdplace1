@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Jamilabreu::Application.load_tasks
+Athirdplace::Application.load_tasks

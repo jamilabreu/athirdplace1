@@ -1,8 +1,8 @@
 # Be sure to restart your server when you modify this file.
 
-Jamilabreu::Application.config.session_store :cookie_store, key: '_jamilabreu_session', :domain => :all
+Athirdplace::Application.config.session_store :cookie_store, key: '_athirdplace_session', :domain => :all
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rails generate session_migration")
-# Jamilabreu::Application.config.session_store :active_record_store
+# Athirdplace::Application.config.session_store :active_record_store

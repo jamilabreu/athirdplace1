@@ -52,8 +52,10 @@ orientation.each do |orientation|
 end
 
 # 82 - 88
-ethnicity = {"African" => ["African-American"], "Latino" => 
-  %W[ Dominican #{'Puerto Rican'} Mexican Cuban Columbian Brazilian Bolivian Argentinian Chilean #{'Costa Rican'} ], "Asian" => []}
+ethnicity = {"African" => %W[ African-American Guyanese ], "Latino" => 
+  %W[ Dominican #{'Puerto Rican'} Mexican Cuban Columbian Brazilian Bolivian Argentinian Chilean #{'Costa Rican'} Guyanese Uruguayan Peruvian
+    
+    ], "Asian" => []}
 ethnicity.each do |key, value|
   c = Community.create(name: key, subdomain: key.parameterize, community_type: "Ethnicity")
   value.each { |v| c.children.create(name: v, subdomain: v.parameterize.delete("-"), community_type: "Ethnicity") }
