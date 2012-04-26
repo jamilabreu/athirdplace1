@@ -7,7 +7,7 @@
 		</div>
 	<% end %>
 		<div class="user_more" id="user_more_<%= user.id %>">
-			<div class="user_schools"><% user.school.each do |school| %><%= school %><BR><% end %></div>
+			<% if user.subscribed? %><div class="user_schools"><% user.school.each do |school| %><%= school %><BR><% end %></div><% end %>
 			<div class="user_standing"><%= user.standing.join %></div>
 			<div class="user_degree"><%= "#{user.degree.join}"%></div>
 		</div>

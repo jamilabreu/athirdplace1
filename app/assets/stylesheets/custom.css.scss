@@ -5,21 +5,27 @@ $black: #363636;
 $red: #C44545;
 $dkred: #931e1e;
 
-html, html a { -webkit-font-smoothing: antialiased; text-shadow: 1px 1px 1px rgba(0,0,0,0.004); }
-a { text-decoration: none; font-weight: bold; }
+html { -webkit-font-smoothing: antialiased; text-shadow: 1px 1px 1px rgba(0,0,0,0.004); }
+html a { -webkit-font-smoothing: antialiased; text-shadow: 1px 1px 1px rgba(0,0,0,0.004);  text-decoration: none; font-weight: bold; }
 a:hover { text-decoration: none; }
 ul, ol { margin: 0; list-style: none; }
-body { padding-top: 60px; font-family: "proxima-nova", Georgia, sans-serif; font-size: 14px; color: $black; background: url("bg.gif"); }
+body { font-family: "proxima-nova", Georgia, sans-serif; font-size: 14px; color: $black; background: url("bg.gif"); }
 form { margin: 0; }
 .hidden { display: none; }
 
-.container, .navbar-fixed-top .container { width: 1020px; }
-.section { border: 1px solid #D9D4D4; background: #FFF; @include border-radius(3px); @include box-shadow(0,1px,3px,0,rgba(0, 0, 0, 0.05)); }
+#wrap { background: url("big-fade.png") repeat-x; background-position: 0 -50px;}
 
-.edit_user { padding: 15px; }
+.container { padding-top: 60px; }
+.navbar-fixed-top .container { padding-top: 0; }
+.container, .navbar-fixed-top .container { width: 1020px; }
+.section { border: 1px solid #D9D4D4; background: #FFF; @include border-radius(3px); @include box-shadow(0,1px,3px,0,rgba(0, 0, 0, 0.05)); 
+	}
+
+.edit_user, .subscription { padding: 15px; }
 
 .newsletter { margin-right: 35px; padding: 8px 15px; }
 .newsletter_header { border-bottom: 1px solid #EEE; margin: 0 0 35px 0; padding: 8px 20px; background: $red; color: white; @include border-radius(3px);}
+
 
 /* Header */
 .navbar-inner { background: $black;  height: 34px;  }
@@ -30,7 +36,7 @@ form { margin: 0; }
 .navbar .nav > li > a.active:hover { background: #444; color: #FFF; }
 
 .navbar .nav > li > a.logo { color: #FFF; padding-left: 0; }
-.navbar .nav > li > a.logo:hover { background: $black; color: #FFF; }
+.navbar .nav > li > a.logo:hover { background: transparent; color: #FFF; }
 .navbar .nav > li > a.logo i { color: #999; line-height: 18px; margin-right: 5px !important; }
 
 .navbar .divider-vertical { height: 34px; margin: 0; border: 0; background: $black; }
@@ -103,8 +109,8 @@ form { margin: 0; }
 .edit_user_image { float: right; @include border-radius(3px); }
 
 .newsletter_users { text-align: center; border-top: 1px solid #EEE; padding: 5px 0; }
-.small_user { display: inline-block; margin: 2px 2px 2px 0; height: 50px; width: 50px; }
-.small_user img { @include border-radius(4px); @include inset-box-shadow(1px,1px,0,0,rgba(0,0,0,.1), 0,-1px,0,0,rgba(0,0,0,.07))  }
+.small_user { display: inline-block; margin: 0 2px 0 0; height: 50px; width: 50px; }
+.small_user img { @include border-radius(0); }
 
 /* Edit Form */
 .field { padding: 8px 0 0 5px; }
@@ -115,34 +121,37 @@ form { margin: 0; }
 .multiple_field label { position: relative; bottom: 11px; }
 #user_about { height: 90px; }
 
-.form-actions { margin: 18px 0 0 0; padding-left: 15px; }
+.form-actions { margin: 18px 0 0 0; padding-left: 15px !important; }
+
+/* New Subscription */
+.subscribe_dialog { padding: 12px 5px; margin-bottom: 12px; border-bottom: 1px solid #EEE }
+.subscribe_text { color: $red; }
+
+#card_month { width: 132px; }
+#card_year { width: 83px; }
+#stripe_error { padding-left: 5px; color: $red; }
+
+.subscription-smallprint { font-size: 12px; position: relative; top: 8px; color: $red; }
+.form-horizontal .form-actions { padding-left: 10px; }
 
 /* Modal */
-.modal { text-align: center; }
-.modal-header { margin: 1px; color: #FFF; font-size: 16px; font-weight: bold; background: $black; @include custom-border-radius(3px,3px,0,0); }
-.modal-header i { font-size: 18px; margin-right: 8px; position: relative; top: 1px; color: #999; }
+.modal h3 { background: #FFF; color: #666; position: relative; top: 18px; display: inline-block; padding: 0 10px; font-size: 19px; font-weight: 400; }
+.modal { padding: 0; background: #FFF; text-align: center;}
+.modal-header { color: #222; font-size: 18px; font-weight: bold; border-bottom: 1px dotted #CCC; padding: 5px 0; margin: 0 10px; }
+.modal-users { margin-top: 35px; padding-left: 1px }
 
-.modal-body { padding: 0; }
+.modal-body { padding: 0; margin: 40px 15px 20px; }
 
-.modal-heading { margin: 10px 0 0 0; }
-.modal-heading span { margin: 0 17px; font-size: 25px; font-weight: 300; color: $black; position: relative; top: 5px; }
+.modal-about { background: #F2F0F0; font-weight: bold; color: #AD9C9C; padding: 18px 0; }
+.modal-about a { color: #BBB; }
+.modal-about a:hover { color: $red; }
+.modal-about i { position: relative; top: 1px; }
 
-.modal-about { background: #F2F0F0; font-weight: bold; color: #AD9C9C; padding: 10px 0; @include border-radius(3px); }
-.modal-about span {  }
-
-.modal-login { text-align: center; }
-
-.modal-users { }
 
 .modal-footer { background: #FFF; }
+.modal-login { text-align: center; }
 
-.learn_more { display: block; padding: 7px 15px 9px; background: #FFF; @include border-radius(3px);}
-
-.facebook_login { font-size: 16px; padding: 7px 15px 9px !important; color: #FFF !important; background: #3b5998; display: inline-block; 
-	border: 1px solid #003366; @include border-radius(3px); }
+.facebook_login { font-size: 16px; margin: 25px 0; padding: 7px 35px 9px !important; color: #FFF !important; background: #3b5998; display: inline-block; 
+	border: 1px solid #003366; @include border-radius(20px); }
 .facebook_login:hover { background: #2d4a87; }
-.facebook_login i { font-size: 19px; margin-right: 8px !important; position: relative; top: 1px; }
-
-
-.modal-backdrop,
-.modal-backdrop.fade.in { }
+.facebook_login i { font-size: 19px; margin-right: 10px !important; position: relative; top: 1px; }

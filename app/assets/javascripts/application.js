@@ -12,7 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require bootstrap.min
+//= require isotope.min
+//= require chosen.min
+//= require users
 
 $(function() {
 	$(".notice, .alert").fadeOut(3000);

@@ -3,7 +3,7 @@
 	<h2><%= image_tag @user.image, :class => "edit_user_image" %><%= @user.first_name %></h2>
 	<%= form_for @user, :html => { :class => "form-inline" } do |f| %>
 	
-		<% %W[ gender standing degree city].each do |name| %>
+		<% %W[ gender standing degree ].each do |name| %>
 			<div class="field <%= "hidden" if name == "gender" && current_user.gender.present? %>">
 				<label><%= name == "city" ? "Current City" : name.titlecase %></label>
 				<%= f.collection_select("#{name}_ids".to_sym, Community.filtered_by("#{name}").sort_by{|c| c.name}, :id, :name, {:include_blank => true, :selected => @community && name == "city" ? current_user.community_ids << @community.id : (current_user.communities_filtered_by("#{name}").blank? ? [3,6] : current_user.community_ids)}, {'data-placeholder' => "Select #{name.titlecase}", :class => 'chzn-select', :id => "user_#{name}"}) %>
@@ -16,6 +16,11 @@
 				<%= f.collection_select("#{name}_ids".to_sym, Community.filtered_by("#{name}").sort_by{|c| c.name}, :id, :name, {:include_blank => true, :selected => @community ? current_user.community_ids << @community.id : current_user.community_ids}, {'data-placeholder' => "Select #{name.titlecase}(s) #{'of Experience' if name == 'field'}", :class => 'chzn-select', :id => "user_#{name}", :multiple => true}) %>
 			</div>
 		<% end %>
+
+		<div class="field">
+			<label>Current City</label>
+			<%= f.collection_select(:city_ids, Community.filtered_by("city").sort_by{|c| c.name}, :id, :name, {:include_blank => true, :selected => @community ? current_user.community_ids << @community.id : (current_user.communities_filtered_by("city").blank? ? nil : current_user.community_ids)}, {'data-placeholder' => "Select City", :class => 'chzn-select', :id => "user_city"}) %>
+		</div>
 		
 		<div id="alumni_fields" class="<%= current_user.standing.first == 'Undergrad' ? 'hidden' : nil  %>">
 			<div class="field">

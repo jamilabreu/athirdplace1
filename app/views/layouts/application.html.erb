@@ -19,11 +19,13 @@
 </head>
 <body>
 <%= render "layouts/header" %>
-<div class="container">
-	<div class="row">
-		<%= content_tag :p, notice, :class => 'alert alert-block' if notice.present? %> 
-		<%= content_tag :p, alert, :class => 'alert alert-error' if alert.present? %>
-		<%= yield %>
+<div id="wrap">
+	<div class="container">
+		<div class="row">
+			<%#= content_tag :p, notice, :class => 'alert alert-block' if notice.present? %> 
+			<%#= content_tag :p, alert, :class => 'alert alert-error' if alert.present? %>
+			<%= yield %>
+		</div>
 	</div>
 </div>
 <%= render "layouts/modal" unless user_signed_in? %>

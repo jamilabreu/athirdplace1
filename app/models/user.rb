@@ -1,15 +1,14 @@
 class User < ActiveRecord::Base  
   has_many :community_users, :dependent => :destroy
   has_many :communities, :through => :community_users
-  # accepts_nested_attributes_for :community_users
-  # attr_writer :community_gender_ids, :community_standing_ids
   
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and , :validatable
+  # Include default devise modules. Others available are: :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and , :validatable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation, :remember_me
+  
+  scope :filtered_by, lambda { |community_ids| joins(:community_users).where("community_users.community_id IN (?)", community_ids).uniq.compact }  
   
   def communities_filtered_by(community_type)
     communities.filtered_by(community_type.titleize)

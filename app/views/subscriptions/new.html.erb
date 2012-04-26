@@ -1,2 +1,42 @@
-<h1>Subscriptions#new</h1>
-<p>Find me in app/views/subscriptions/new.html.erb</p>
+<div class="section subscription">
+	<h2>Subscribe</h2>
+	<%= form_for @subscription, :html => { :class => "form-horizontal" } do |f| %>
+		<div class="subscribe_dialog">
+			<label class="checkbox"><%= f.check_box :plan_id, {checked: true}, 1 %><b>$1.25 / month</b> ( $15 yearly )</label>
+				<div class="subscribe_text">The DSN Newsletter contains job postings, events, and community announcements delivered according to their relevance to you ( based on your school, standing, and fields of interest ). Subscribers get access to all online announcements & advanced people search.</div>
+		</div>
+		<div id="stripe_error">
+		  <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+		</div>
+		<%= f.hidden_field :user_id, { :value => current_user.id } if user_signed_in? %>
+		<%#= f.hidden_field :plan_id, { :value => 1 } %>
+		<%= f.hidden_field :description, { :value => "#{current_user.name if user_signed_in?} (#{current_user.email if user_signed_in?})" } %>
+		<%= f.hidden_field :stripe_card_token %>
+		
+
+		<% if @subscription.stripe_card_token.present? %>
+		  Credit card has been provided.
+		<% else %>
+		  <div class="field">
+		    <%= label_tag :card_number, "Card Number" %>
+		    <%= text_field_tag :card_number, nil, name: nil %>
+		  </div>
+		  <div class="field">
+		    <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+		    <%= text_field_tag :card_code, nil, name: nil %>
+		  </div>
+		  <div class="field">
+		    <%= label_tag :card_month, "Card Expiration" %>
+		    <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month", :class => "chzn-select"} %>
+		    <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year", :class => "chzn-select"} %>
+		  </div>
+		<BR>
+		<% end %>
+		<div class="form-actions">
+			<%= f.submit "Submit and Subscribe", :class => "btn btn-inverse" %><BR>
+			<span class="subscription-smallprint">
+				*Clicking will submit a recurring charge of $15/year.
+			</span>
+		</div>
+	<% end %>
+</div>

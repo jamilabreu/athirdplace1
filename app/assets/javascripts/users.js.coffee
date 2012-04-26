@@ -23,15 +23,13 @@ jQuery ->
 	
 	# Edit User Form
 	$('#user_standing').live 'change', () ->
-		if $('#user_standing').val() is "3"
+		if $('#user_standing').val() is '3'
 			$('#alumni_fields').hide()
-			$("#user_degree").val("6") 
-			$("#user_degree").trigger("liszt:updated")
-		else if $('#user_standing').val() is "4"
+			$('#user_degree').val('6')
+		else if $('#user_standing').val() is '4'
 			$('#alumni_fields').show()
-			$("#user_degree").val("8")
-			$("#user_degree").trigger("liszt:updated")
+			$('#user_degree').val('8')
 		else
 			$('#alumni_fields').show()
-			$("#user_degree").val("7")
-			$("#user_degree").trigger("liszt:updated")
+			$('#user_degree').val('7')
+		$('#user_degree').trigger('liszt:updated')
