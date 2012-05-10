@@ -1,0 +1,8 @@
+$('.conversation').html("<%= j render :partial => 'inboxes/discussions/conversation', :locals => {:discussion => @discussion, :partner => @partner} %>");
+$('abbr.timeago').timeago();
+$(".active_inbox").removeClass("active_inbox");
+$("#inbox_item_<%= @discussion.partner(current_user).id %>").addClass("active_inbox");
+$("#inbox_item_<%= @discussion.partner(current_user).id %> i").remove();
+<% if @discussion.messages.length > 7 %>
+	$('.dialog').scrollTop($('.messages').height());
+<% end %>

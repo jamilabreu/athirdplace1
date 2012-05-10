@@ -1,0 +1,7 @@
+.message
+	.message_image= image_tag(message.user.image)
+	.message_sender
+		= message.user.first_name
+		%abbr.timeago{:title => message.created_at.iso8601}
+	.message_body= message.body
+	%div{:style => "clear: left"}

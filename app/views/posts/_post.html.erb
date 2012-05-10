@@ -1,0 +1,12 @@
+<div class="post">
+	<!--<<%#= link_to post_path(post), :class => "post_image", :remote => true do %>
+		<%# if post.post_type == "Event" %><i class="icon-calendar"></i><%# else %><i class="icon-asterisk"></i><%# end %>
+	<%# end %>-->
+	<span class="post_vote"><i class="icon-chevron-up"></i><span>123</span></span>
+	<%= link_to post_path(post), :remote => true do %><span class="post_title"><%= truncate(post.title, :length => 73) %></span><% end %>
+	<%= link_to root_path do %><span class="post_flag"><i class="icon-exclamation-sign"></i></span><% end %>
+	<div class="post_more" id="post_more_<%= post.id %>">
+		<div class="post_more_title"><%= post.title %></div>
+		<div class="post_more_body"><%= post.body %></div>
+	</div>
+</div>

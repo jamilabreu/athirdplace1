@@ -1,21 +1,22 @@
 <div class="left_column_holder">
 	<div class="left_column">
-		
 		<ul><%= link_to "All", root_url %></ul>	
 		
 		<% @filters.each do |key, value| %>
-			<div class="filter_title"><%= key %></div>
-			<ul>
-			<% value.each do |community| %>
-				<%= link_to root_path(ids: selected?(community) ? (params[:ids] - [community.id.to_s]) : (params[:ids].to_a | [community.id.to_s])), :class => selected?(community) ? "selected" : nil do %>
-				<li><%= community.name %><% if selected?(community) %><i class="icon-remove icon-white"></i><% end %></li>
+			<% if value.present? %>
+				<div class="filter_title"><%= key %></div>
+				<ul>
+				<% value.each do |community| %>
+					<%= link_to root_path(ids: selected?(community) ? (params[:ids] - [community.id.to_s]) : (params[:ids].to_a | [community.id.to_s])), :class => selected?(community) ? "selected" : nil do %>
+					<li><%= community.name %><% if selected?(community) %><i class="icon-remove icon-white"></i><% end %></li>
+					<% end %>
 				<% end %>
+				</ul>
 			<% end %>
-			</ul>
 		<% end %>
 		
 	</div>
-</div>
-<% unless user_signed_in? && current_user.subscribed? %>
+	<% unless user_signed_in? && current_user.subscribed? %>
 <div class="more_filters"><%= link_to new_subscription_path do %><i class="icon-asterisk"></i>get more filters<% end %>	</div>
 <% end %>
+</div>

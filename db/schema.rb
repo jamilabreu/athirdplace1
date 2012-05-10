@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120420192326) do
+ActiveRecord::Schema.define(:version => 20120508032225) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -51,11 +51,31 @@ ActiveRecord::Schema.define(:version => 20120420192326) do
     t.string   "subdomain"
     t.string   "community_type"
     t.string   "ancestry"
+    t.string   "region"
+    t.string   "region_code"
+    t.string   "country"
+    t.integer  "country_id"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.integer  "school_id"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
 
   add_index "communities", ["ancestry"], :name => "index_communities_on_ancestry"
+
+  create_table "community_posts", :force => true do |t|
+    t.integer  "community_id"
+    t.integer  "post_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "community_posts", ["community_id"], :name => "index_community_posts_on_community_id"
+  add_index "community_posts", ["post_id"], :name => "index_community_posts_on_post_id"
 
   create_table "community_users", :force => true do |t|
     t.integer  "community_id"
@@ -66,6 +86,38 @@ ActiveRecord::Schema.define(:version => 20120420192326) do
 
   add_index "community_users", ["community_id"], :name => "index_community_users_on_community_id"
   add_index "community_users", ["user_id"], :name => "index_community_users_on_user_id"
+
+  create_table "discussions", :force => true do |t|
+    t.integer  "messages_count",   :default => 0
+    t.integer  "discussable_id"
+    t.string   "discussable_type"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "discussion_id"
+    t.text     "body"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "posts", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.text     "body_html"
+    t.string   "post_type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "speakers", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "discussion_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "subscriptions", :force => true do |t|
     t.integer  "user_id"
@@ -97,12 +149,12 @@ ActiveRecord::Schema.define(:version => 20120420192326) do
     t.string   "last_name"
     t.string   "image"
     t.string   "large_image"
-    t.string   "twitter_name"
     t.string   "gender"
-    t.string   "profile_url"
     t.string   "about"
     t.string   "company"
     t.string   "title"
+    t.string   "profile_url"
+    t.string   "twitter_name"
     t.string   "blog_url"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false

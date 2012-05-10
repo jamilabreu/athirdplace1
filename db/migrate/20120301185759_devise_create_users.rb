@@ -44,12 +44,12 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string  :last_name     
       t.string  :image
       t.string  :large_image
-      t.string  :twitter_name
       t.string  :gender
-      t.string  :profile_url
       t.string  :about
       t.string  :company
       t.string  :title
+      t.string  :profile_url
+      t.string  :twitter_name
       t.string  :blog_url
             
       t.timestamps

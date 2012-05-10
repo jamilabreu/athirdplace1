@@ -165,7 +165,10 @@ a:hover {
 .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 940px;
+  width: 1020px;
+}
+.span13 {
+  width: 1020px;
 }
 .span12 {
   width: 940px;
@@ -469,8 +472,8 @@ em {
   color: #999999;
 }
 abbr[title] {
-  border-bottom: 1px dotted #ddd;
-  cursor: help;
+  //border-bottom: 1px dotted #ddd;
+  //cursor: help;
 }
 abbr.initialism {
   font-size: 90%;
@@ -3277,8 +3280,8 @@ input[type="submit"].btn.btn-mini {
   left: 50%;
   z-index: 1050;
   overflow: auto;
-  width: 420px;
-  margin: -250px 0 0 -210px;
+  width: 407px;
+  margin: -250px 0 0 -235px;
   background-color: #ffffff;
   border: 1px solid #999;
   border: 1px solid rgba(0, 0, 0, 0.3);

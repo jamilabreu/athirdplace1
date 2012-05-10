@@ -16,10 +16,15 @@
 //= require isotope.min
 //= require chosen.min
 //= require users
+//= require timeago
 
 $(function() {
-	$(".notice, .alert").fadeOut(3000);
+	//$(".notice, .alert").fadeOut(10000);
 	
 	//Chosen
-	$(".chzn-select").chosen();	
+	$(".chzn-select").chosen();
+
+	//Conversations
+	$('abbr.timeago').timeago();
+	$('.dialog').scrollTop($('.messages').height());
 });

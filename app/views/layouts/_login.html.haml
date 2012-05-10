@@ -1,0 +1,18 @@
+.modal{:id => 'login-modal'}
+	.login-modal-inner
+		.login-modal-header
+			%h3= @community ? "#{@community.name} Student + Alumni Network" : "Home"
+		.login-modal-users
+			= render :partial => "users/user_sm", :collection => User.filtered_by(@community_ids).sample(8), :as => :user
+		.login-modal-about
+			a people directory and community newsletter
+			%i.icon-chevron-down
+		= link_to "#{request.protocol + request.domain}/users/auth/facebook", :class => "btn btn-primary facebook_login" do
+			%i.icon-facebook-sign
+			Sign In with Facebook
+		
+:javascript
+	$(function() { 
+		$('#login-modal').modal({ keyboard: false, backdrop: "static" });
+		$("body").css("overflow", "hidden");
+	});

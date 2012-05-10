@@ -15,8 +15,11 @@ module ApplicationHelper
     params[:controller] == "users" && params[:action] == "edit"
   end
   
+  def conversations_page
+    params[:controller] == "inboxes/discussions" && params[:action] == "index"
+  end
+  
   def selected?(community)
     params[:ids].present? && params[:ids].include?(community.id.to_s)
   end
-
 end

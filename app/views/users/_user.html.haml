@@ -1,0 +1,37 @@
+.user
+	= link_to user_path(user), :remote => true do
+		.user_image
+			= image_tag user.large_image, :title => user.name
+			.user_preview
+				.user_name= user.first_name
+				.user_standing= user.standing.join
+	.user_profile{:id => "user_profile_#{user.id}"}
+		.user_section
+			.user_degree= user.degree.join
+			.user_school= user.school.join
+		.user_section
+			.user_fields
+				- user.field.each do |field|
+					%div= field
+		- if user.about?
+			.user_section
+				.user_about= user.about
+		.user_section
+			- if user_signed_in? && Discussion.find_between_users(user, current_user)
+				= link_to discussions_path(:id => user), :class => 'btn btn-conversation' do
+					%i.icon-comments
+					Continue Conversation
+			- else
+				= link_to new_discussion_path(:id => user), :class => 'btn btn-conversation', :remote => true do
+					%i.icon-comments
+					Start Conversation
+		- if user.twitter_name?
+			.user_section
+				= link_to "http://twitter.com/#{user.twitter_name}", :target => '_blank' do
+					%i.icon-twitter-sign
+					= user.twitter_name
+		- if user.blog_url?
+			.user_section
+				= link_to user.blog_url, :target => '_blank' do
+					%i.icon-external-link
+					blog

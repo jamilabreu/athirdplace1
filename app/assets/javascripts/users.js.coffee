@@ -23,9 +23,9 @@ jQuery ->
 	
 	# Edit User Form
 	$('#user_standing').live 'change', () ->
-		if $('#user_standing').val() is '3'
+		if $('#user_standing').val() is '5'
 			$('#alumni_fields').hide()
-			$('#user_degree').val('6')
+			$('#user_degree').val('11')
 		else if $('#user_standing').val() is '4'
 			$('#alumni_fields').show()
 			$('#user_degree').val('8')

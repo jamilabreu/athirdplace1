@@ -1,0 +1,26 @@
+<div class="offset2 span9">
+	<% if user_signed_in? && current_user.sign_in_count == 1 %>
+	<div class="info-box" style="margin: 0 0 10px;">
+		<div class="info-box-inner" style="background: #4B576E">
+		<i class="icon-info-sign"></i>submit to the community and vote - most popular posts will be in monthly newsletter
+		</div>
+	</div>
+	<% end %>
+	<div class="posts">
+		<div class="new-post">
+			<div class="new-post-inner">
+				<%= link_to root_path do %><i class="icon-plus"></i>New Post<% end %>
+			</div>
+		</div>
+		<div class="post">
+			
+		</div>
+		<!--<h2>Newsletter</h2>
+		<div class="newsletter_users">
+			<%#= render :partial => "users/user_sm", :collection => User.all.sample(17), :as => :user %>
+		</div>
+		-->
+		<%= render @posts %>
+
+	</div>
+</div>

@@ -1,0 +1,10 @@
+$('.messages').append("<%= j render @message %>");
+$('abbr.timeago').timeago();
+$("#new_message")[0].reset();
+$("#message_body").focus();
+<% if @discussion.messages.length == 1 %>
+	$('.blank_messages').remove();
+<% elsif @discussion.messages.length > 7 %>
+	$('.dialog').css('overflow-y', 'scroll');
+	$('.dialog').scrollTop($('.messages').height());
+<% end %>

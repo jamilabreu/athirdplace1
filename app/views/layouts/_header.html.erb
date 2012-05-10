@@ -6,13 +6,17 @@
 							<i class="icon-asterisk"></i><%= @community ? "#{@community.name} Student + Alumni Network" : "Home" %>
 						<% end %>
 				</li>
-				<li><%= link_to root_url, :class => users_page ? "active" : nil do %><i class="icon-user"></i>People<% end %></li>
-				<li><%= link_to newsletter_path, :class => newsletter_page ? "active" : nil do %><i class="icon-align-justify"></i>Newsletter<% end %></li>
 			</ul>
 			<% if user_signed_in? %>
 			<span class="right_nav">
-				<ul class="nav" style="margin-right: 38px;">
-					<li class="divider-vertical" style="background: #202020"></li>
+				<ul class="nav" style="margin-right: 0;">
+
+								<li><%= link_to root_url, :class => users_page ? "active" : nil do %><i class="icon-user"></i><% end %></li>
+			
+								<li><%= link_to discussions_path, :class => conversations_page ? "active" : nil do %><i class="icon-comments"></i><% end %></li>
+				
+				<li><%= link_to posts_path, :class => newsletter_page ? "active" : nil do %><i class="icon-align-justify"></i><% end %></li>
+					<li class="divider-vertical"></li>
 					<li class="dropdown">
 						<%= link_to "#", :class => edit_page ? "dropdown-toggle active" : "dropdown-toggle", "data-toggle" => "dropdown" do %>
 							<i class="icon-cog"></i><b class="caret"></b>
@@ -22,7 +26,6 @@
 							<li><%= link_to logout_path do %><i class="icon-off"></i>&nbsp;&nbsp;Logout<% end %></li>
 						</ul>
 					</li>
-					<li class="divider-vertical" style="background: #202020;"></li>
 				</ul>
 			</span>
 			<% end %>

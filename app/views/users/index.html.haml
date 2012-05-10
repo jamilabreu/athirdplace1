@@ -1,0 +1,19 @@
+.span2
+	= render "layouts/left_column"
+.span11
+	#users
+		/
+			- if user_signed_in?
+				= link_to discussions_path do
+					.user_activity
+						.user_activity_inner
+							%i.icon-comments
+							= current_user.discussions.length + 10
+		= render @users
+	= paginate @users, :seed => params[:seed]
+/ 
+	- if user_signed_in? && current_user.sign_in_count == 2
+		.info-box
+			.info-box-inner
+				%i.icon-info-sign
+				use filters on left to find mentors and other awesome people. (click images to expand)

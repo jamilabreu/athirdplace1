@@ -1,0 +1,6 @@
+= form_for @discussion do |f|
+	= select_tag "discussion[recipient_tokens]", options_from_collection_for_select(User.all, :id, :first_name, params[:to]), :multiple => true, :class => 'chzn-select'
+	%p
+		= f.fields_for :messages do |j|
+			= j.text_area :body, :placeholder => "Start Conversation..." 
+	%p= f.submit

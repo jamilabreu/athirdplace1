@@ -1,0 +1,13 @@
+.conversation_image= image_tag(partner.large_image)
+%h1
+	%span= partner.first_name
+.dialog{:style => discussion.present? && discussion.messages.length > 7 ? "overflow-y: scroll" : nil }
+	.messages
+		- if discussion.messages.blank?
+			.blank_messages start conversation
+		- else
+			= render discussion.messages
+%div{:style => "clear: both"}
+	= form_for Message.new, :url => discussion_messages_path(discussion.id), :method => :post, :remote => true do |f|
+		= f.text_area :body
+		= f.submit "Send", :class => "btn"

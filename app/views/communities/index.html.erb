@@ -2,7 +2,9 @@
 	<div class="home">
 		<div class="home_hero">
 			<h4>"a third place" is an informal meeting space for building community beyond the home or workplace.<h4>
-			<%= link_to "Dominicans", root_url(subdomain: "dominican") %>
+			<% @communities.each do |community| %>
+			<%= link_to community.name, root_url(subdomain: community.subdomain) %>
+			<% end %>
 		</div>
 		<div class="home_users" id="users">
 			<%= render @users %>
