@@ -19,6 +19,7 @@ Athirdplace::Application.routes.draw do
   
   
   match '', to: 'users#index', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
+  #match 'people' => 'users#index', :as => :users
   #match '/users/:id/vote_up' => 'users#vote_up', :as => :vote_up_user
   #match 'newsletter' => 'subscriptions#index', :as => :newsletter
   root :to => 'communities#index'

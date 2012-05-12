@@ -7,8 +7,8 @@ module ApplicationHelper
     params[:controller] == "users" && params[:action] == "index"
   end
   
-  def newsletter_page
-    params[:controller] == "subscriptions" && params[:action] == "index"
+  def posts_page
+    params[:controller] == "posts" && params[:action] == "index"
   end
   
   def edit_page
@@ -21,5 +21,9 @@ module ApplicationHelper
   
   def selected?(community)
     params[:ids].present? && params[:ids].include?(community.id.to_s)
+  end
+  
+  def new_filter_ids(community)
+    selected?(community) ? (params[:ids] - [community.id.to_s]) : (params[:ids].to_a | [community.id.to_s])
   end
 end

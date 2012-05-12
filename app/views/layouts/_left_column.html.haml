@@ -1,0 +1,23 @@
+.left_column_holder
+	.left_column
+		%ul{:style => "padding: 1px"}
+		.filter_title Filters
+		%ul
+			.filter
+				= link_to "All", root_url
+		- @filters.each do |key, value|
+			- if value.present?
+				.filter_title= key.titleize
+				%ul
+					- value.each do |community|
+						.filter{:class => selected?(community) ? "selected" : nil}
+							= link_to(:controller => params[:controller], :action => params[:action], ids: new_filter_ids(community)) do
+								%li
+									= community.name
+									- if selected?(community)
+										%i.icon-remove.icon-white
+	- unless user_signed_in? && current_user.subscribed?
+		.more_filters
+			= link_to new_subscription_path do
+				%i.icon-asterisk
+				get more filters

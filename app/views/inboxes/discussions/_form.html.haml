@@ -1,6 +1,16 @@
 = form_for @discussion do |f|
-	= select_tag "discussion[recipient_tokens]", options_from_collection_for_select(User.all, :id, :first_name, params[:to]), :multiple => true, :class => 'chzn-select'
-	%p
-		= f.fields_for :messages do |j|
-			= j.text_area :body, :placeholder => "Start Conversation..." 
-	%p= f.submit
+	.hide
+		= select_tag "discussion[recipient_tokens]", options_from_collection_for_select(User.all, :id, :first_name, params[:id].to_i), :multiple => true
+	= f.fields_for :messages do |j|
+		= j.text_area :body, :placeholder => "Start Conversation..."
+	.modal-footer.message-modal-footer
+		= f.submit 'Send', :class => 'btn btn-primary btn-send-message', :style => 'font-weight: bold'
+		%a.btn.btn-cancel-message{:href => "#", "data-dismiss" => 'modal'} Cancel
+:javascript
+	$('#new_discussion textarea').live('focus keydown keyup', function(){
+		if ( !$.trim($(this).val()) ) {
+			$('.btn-send-message').prop('disabled', true);
+		} else {
+			$('.btn-send-message').prop('disabled', false);
+		}
+	});

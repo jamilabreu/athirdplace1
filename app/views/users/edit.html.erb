@@ -8,7 +8,7 @@
 		<% %W[ gender standing degree ].each do |name| %>
 			<div class="field <%= "hidden" if name == "gender" && current_user.gender.present? %>">
 				<label><%= name.titlecase %></label>
-				<%= f.collection_select("#{name}_ids".to_sym, Community.filtered_by("#{name}"), :id, :name, {:include_blank => true, :selected => current_user.communities.filtered_by("#{name}").blank? ? [3,6] : current_user.community_ids}, {'data-placeholder' => "Select #{name.titlecase}", :class => 'chzn-select', :id => "user_#{name}"}) %>
+				<%= f.collection_select("#{name}_ids".to_sym, Community.filtered_by("#{name}"), :id, :name, {:include_blank => true, :selected => current_user.communities.filtered_by("#{name}").blank? ? [5,11] : current_user.community_ids}, {'data-placeholder' => "Select #{name.titlecase}", :class => 'chzn-select', :id => "user_#{name}"}) %>
 			</div>
 		<% end %>
 		
@@ -31,7 +31,7 @@
 			</div>
 		<% end %>
 		
-		<div id="alumni_fields" class="<%= current_user.standing.first == 'Undergrad' || current_user.standing.blank? ? 'hidden' : nil  %>">
+		<div id="alumni_fields" class="<%= current_user.standing.first == 'Undergraduate' || current_user.standing.blank? ? 'hidden' : nil  %>">
 			<div class="field">
 				<label>Job Title</label><%= f.text_field :title %>
 			</div>

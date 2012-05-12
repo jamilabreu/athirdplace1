@@ -55,6 +55,17 @@
 	background-image: linear-gradient($start, $from, $to);
 }
 
+@mixin triple-gradient($color1, $color2) {
+	background: -moz-linear-gradient($color1 0%, $color2 40%, $color2 60%, $color1 100%); /* FF 3.6+ */  
+	background: -ms-linear-gradient($color1 0%, $color2 40%, $color2 60%, $color1 100%); /* IE10 */  
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $color1), color-stop(40%, $color2), color-stop(60%, $color2), color-stop(100%, $color1)); /* Safari 4+, Chrome 2+ */  
+	background: -webkit-linear-gradient($color1 0%, $color2 40%, $color2 60%, $color1 100%); /* Safari 5.1+, Chrome 10+ */  
+	background: -o-linear-gradient($color1 0%, $color2 40%, $color2 60%, $color1 100%); /* Opera 11.10 */  
+	background: linear-gradient($color1 0%, $color2 40%, $color2 60%, $color1 100%); /* the standard */ 
+}
+
+
+
 /* Apply a CSS3 box-rotate: @include box-rotate(10deg); */
 @mixin box-rotate($deg) {
 	-moz-transform: rotate($deg);

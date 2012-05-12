@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     Subscription.find_by_user_id(id).present? || created_at.advance(months: 1) > DateTime.now
   end
   
-  %W[ gender standing degree city field school ethnicity orientation religion relationship ].each do |name|
+  %W[ gender standing degree city field school ethnicity orientation religion relationship post_type ].each do |name|
     define_method "#{name}" do
       self.communities.filtered_by("#{name}").map(&:name)
     end

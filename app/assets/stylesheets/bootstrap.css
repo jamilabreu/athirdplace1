@@ -2116,7 +2116,7 @@ table .span24 {
 .btn-primary.active,
 .btn-primary.disabled,
 .btn-primary[disabled] {
-  background-color: #0055cc;
+  //background-color: #0055cc;
 }
 .btn-primary:active,
 .btn-primary.active {
@@ -3280,8 +3280,8 @@ input[type="submit"].btn.btn-mini {
   left: 50%;
   z-index: 1050;
   overflow: auto;
-  width: 407px;
-  margin: -250px 0 0 -235px;
+  width: 409px;
+  margin: -250px 0 0 -215px;
   background-color: #ffffff;
   border: 1px solid #999;
   border: 1px solid rgba(0, 0, 0, 0.3);

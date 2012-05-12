@@ -4,9 +4,10 @@ class CreatePosts < ActiveRecord::Migration
       t.string :title
       t.text :body
       t.text :body_html
-      t.string :post_type
+      t.references :user
 
       t.timestamps
     end
+    add_index :posts, :user_id
   end
 end

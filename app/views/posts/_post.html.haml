@@ -1,0 +1,28 @@
+.post
+	.post-image
+		- if user_signed_in? && Discussion.find_between_users(post.user, current_user)
+			= link_to image_tag(post.user.image), discussions_path(:id => post.user)
+		- else
+			= link_to image_tag(post.user.image), new_discussion_path(:id => post.user), :remote => true
+	.post-preview.section
+		.post-bubble	
+		.post-vote
+			= link_to root_path, :class => 'up' do
+				%i.icon-chevron-up
+			= link_to root_path, :class => 'down' do
+				%i.icon-chevron-down
+		.post-title= truncate(post.title, :length => 75)
+		.post-details
+			- if post.post_type.join == "Event"
+				%i.icon-calendar
+			- elsif post.post_type.join == "Announcement"
+				%i.icon-external-link
+			%abbr.timeago{:title => post.created_at.iso8601}
+			from
+			- if user_signed_in? && Discussion.find_between_users(post.user, current_user)
+				= link_to post.user.first_name, discussions_path(:id => post.user)
+			- else
+				= link_to post.user.first_name, new_discussion_path(:id => post.user), :remote => true
+		.post-profile
+			= post.title
+			= post.body

@@ -1,0 +1,5 @@
+$('#message-modal').modal();
+$('.message-modal-image').html("<%= j image_tag(@user.image) %>");
+$('.message-modal-header h3').html("<%= @user.first_name %>");
+$('.message-modal-body').html("<%= j render :partial => 'inboxes/discussions/form' %>");
+$("#new_discussion textarea").focus();

@@ -8,6 +8,14 @@ class PostsController < ApplicationController
       filtered_posts = community_posts
     end
     @posts = Kaminari.paginate_array(filtered_posts).page(params[:page]).per(15)
+    
+    # Filters
+    posts_community_ids = filtered_posts.map(&:community_ids).flatten.uniq.compact.delete_if { |id| id == @community.id || id == @community.parent_id }
+    @filters = {}
+    categories = current_user && current_user.subscribed? ? %w[ post_type field ] : %w[ standing field ]
+    categories.each do |c|
+     @filters[c] = Community.where("communities.id IN (?)", posts_community_ids & Community.filtered_by(c).map(&:id))#.sort_by{|c| c.name}
+    end
   end
 
   def show

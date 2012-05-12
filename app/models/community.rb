@@ -7,9 +7,6 @@ class Community < ActiveRecord::Base
 
   validates :name, :presence => true, :uniqueness => true
   
-  #geocoded_by :city_and_country
-  #after_validation :geocode
-  
   scope :filtered_by, lambda { |community_type| where( :community_type => community_type.titleize ) }
   
   def city_and_country
