@@ -30,7 +30,11 @@
 								%li
 									= link_to edit_path do
 										%i.icon-cog
-										Account
+										Settings
+								%li
+									= link_to root_url(:subdomain => false) do
+										%i.icon-align-justify
+										Directory
 								%li
 									= link_to logout_path do
 										%i.icon-off
