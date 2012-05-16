@@ -7,9 +7,10 @@
 		.login-modal-about
 			a people directory and community newsletter
 			%i.icon-chevron-down
-		= link_to "#{request.protocol + request.domain}/users/auth/facebook", :class => "btn btn-primary facebook_login" do
-			%i.icon-facebook-sign
-			Sign In with Facebook
+		.facebook_login
+			= link_to "#{request.protocol + request.domain}/users/auth/facebook", :class => "btn btn-primary" do
+				%i.icon-facebook-sign
+				Sign In with Facebook
 		
 :javascript
 	$(function() { 

@@ -2,13 +2,6 @@
 	= render "layouts/left_column"
 .span11
 	#users
-		/
-			- if user_signed_in?
-				= link_to discussions_path do
-					.user_activity
-						.user_activity_inner
-							%i.icon-comments
-							= current_user.discussions.length + 10
 		= render @users
 	= paginate @users, :seed => params[:seed]
 / 

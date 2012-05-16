@@ -12,13 +12,15 @@
 						%li.divider-vertical
 						%li
 							= link_to posts_path, :class => posts_page ? "active" : nil do
-								%i.icon-asterisk
+								%i.icon-align-justify
+								News
 						%li.divider-vertical
 						%li
 							= link_to root_url, :class => users_page ? "active" : nil do
 								%i.icon-user
+								People
 						%li.divider-vertical
-						%li
+						%li{:id => 'nav-chats-button'}
 							= link_to discussions_path, :class => conversations_page ? "active" : nil do
 								%i.icon-comments
 						%li.divider-vertical

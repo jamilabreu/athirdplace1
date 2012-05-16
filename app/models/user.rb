@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_inboxes
+  acts_as_voter
+  has_karma(:posts, :as => :user, :weight => 1)
   has_many :community_users, :dependent => :destroy
   has_many :communities, :through => :community_users
   
@@ -23,6 +25,10 @@ class User < ActiveRecord::Base
   
   def subscribed?
     Subscription.find_by_user_id(id).present? || created_at.advance(months: 1) > DateTime.now
+  end
+  
+  def unread_messages_count
+    
   end
   
   %W[ gender standing degree city field school ethnicity orientation religion relationship post_type ].each do |name|

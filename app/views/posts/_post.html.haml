@@ -1,28 +1,44 @@
 .post
 	.post-image
-		- if user_signed_in? && Discussion.find_between_users(post.user, current_user)
+		- if post.user == current_user
+			= image_tag(post.user.image)
+		- elsif user_signed_in? && Discussion.find_between_users(post.user, current_user)
 			= link_to image_tag(post.user.image), discussions_path(:id => post.user)
 		- else
 			= link_to image_tag(post.user.image), new_discussion_path(:id => post.user), :remote => true
-	.post-preview.section
-		.post-bubble	
-		.post-vote
-			= link_to root_path, :class => 'up' do
-				%i.icon-chevron-up
-			= link_to root_path, :class => 'down' do
-				%i.icon-chevron-down
-		.post-title= truncate(post.title, :length => 75)
-		.post-details
-			- if post.post_type.join == "Event"
-				%i.icon-calendar
-			- elsif post.post_type.join == "Announcement"
-				%i.icon-external-link
-			%abbr.timeago{:title => post.created_at.iso8601}
-			from
-			- if user_signed_in? && Discussion.find_between_users(post.user, current_user)
-				= link_to post.user.first_name, discussions_path(:id => post.user)
-			- else
-				= link_to post.user.first_name, new_discussion_path(:id => post.user), :remote => true
-		.post-profile
-			= post.title
-			= post.body
+	.post-preview
+		.post-votebox
+			.post-vote.post-up{:id => "vote_up_#{post.id}", :class => user_signed_in? && current_user.voted_for?(post) ? 'post-voted' : nil}
+				= link_to vote_on_post_path(post, :up => true), :method => 'post', :remote => true do
+					%i.icon-chevron-up
+			.post-vote.post-down{:id => "vote_down_#{post.id}", :class => user_signed_in? && current_user.voted_against?(post) ? 'post-voted' : nil}
+				= link_to vote_on_post_path(post), :class => "#{user_signed_in? && current_user.voted_against?(post) ? 'voted-down' : 'down'}", :method => 'post', :remote => true do
+					%i.icon-chevron-down
+		.post-contents
+			.post-title{:id => "post_title_#{post.id}"}
+				= post.body_html
+			.post-body{:id => "post_body_#{post.id}"}
+				= post.body_html
+			.post-details
+				- if post.post_type.join == "Announcement"
+					%i.icon-asterisk	
+				- elsif post.post_type.join == "Event"
+					%i.icon-calendar
+				- elsif post.post_type.join == "Link"
+					%i.icon-external-link
+				- elsif post.post_type.join == "Image"
+					%i.icon-picture
+				- elsif post.post_type.join == "Video"
+					%i.icon-film
+				- elsif post.post_type.join == "Question"
+					%i.icon-question-sign	
+				%span{:id => "plusminus_#{post.id}"}
+					= pluralize(post.plusminus, 'point')
+				by
+				- if post.user == current_user
+					= link_to current_user.first_name, '#'
+				- elsif user_signed_in? && Discussion.find_between_users(post.user, current_user)
+					= link_to post.user.first_name, discussions_path(:id => post.user)
+				- else
+					= link_to post.user.first_name, new_discussion_path(:id => post.user), :remote => true
+				%abbr.timeago{:title => post.created_at.iso8601}

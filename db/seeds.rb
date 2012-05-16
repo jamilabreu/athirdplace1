@@ -60,10 +60,10 @@ ethnicity.each do |key, value|
   value.each { |v| c.children.create(name: v, subdomain: v.parameterize.delete("-"), community_type: "Ethnicity") }
 end
 
-# 105 - 106
-post_type = %W[ Announcement Event ]
+# 138 -140
+post_type = %W[ Announcement Event Link Image Video Question ]
 post_type.each do |post_type|
-  Community.create(name: post_type, subdomain: post_type.parameterize.delete("-"), community_type: "post_type")
+  Community.create(name: post_type, subdomain: post_type.parameterize.delete("-"), community_type: "Post Type")
 end
 
 #Schools
@@ -108,10 +108,9 @@ end
 50.times do
   random_uid = Random.new.rand(300000..302715)
   Post.create!(
-    title: Faker::Lorem.paragraph,
     body: Faker::Lorem.paragraph,
     user_id: Random.new.rand(1..50),
     community_ids: [Random.new.rand(1..2).to_s, Random.new.rand(3..5).to_s, Random.new.rand(6..13).to_s, Random.new.rand(14..56).to_s, 
-                    Random.new.rand(57..58).to_s, Random.new.rand(59..60).to_s, Random.new.rand(61..75).to_s, "88", Random.new.rand(138..139).to_s]
+                    Random.new.rand(57..58).to_s, Random.new.rand(59..60).to_s, Random.new.rand(61..75).to_s, "88", Random.new.rand(138..143).to_s]
   )
 end

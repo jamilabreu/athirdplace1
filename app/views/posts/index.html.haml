@@ -1,5 +1,27 @@
 .span2
 	= render "layouts/left_column"
-.span11
-	.posts.section
-		= render @posts
+.span8
+	#posts.section
+		.posts-bar
+			= link_to "Popular", posts_path, :class => params[:newest].present? ? nil : 'active'
+			= link_to "Newest", posts_path(:newest => true), :class => params[:newest].present? ? 'active' : nil
+		.new-post-bar					
+			= form_for Post.new do |f|
+				.new-post-bar-inner
+					.new-post-close
+						= link_to cancel_post_path, :remote => true do
+							%i.icon-remove
+					= f.collection_select(:post_type_ids, Community.filtered_by("Post Type"), :id, :name, {:include_blank => true, :selected => 138}, {'data-placeholder' => "Select Type", :class => 'chzn-select'})	
+					= f.text_area :body, :placeholder => "What would you like to share?"
+					.new-post-bottom
+						= f.submit 'Share', :id => 'post-submit', :class => 'btn btn-primary btn-send-message', :style => 'font-weight: bold'
+						.new-post-counter
+							140
+					= f.collection_select(:community_ids, Community.all, :id, :name, {:include_blank => true, :selected => @community.id}, {'data-placeholder' => "Select Communities", :class => 'chzn-select', :multiple => true})
+		#posts-inner
+			= render @posts
+.span3
+	.section
+		#posts-right
+			#posts-right-inner
+				test

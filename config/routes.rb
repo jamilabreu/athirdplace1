@@ -14,12 +14,17 @@ Athirdplace::Application.routes.draw do
   resources :communities do
     resources :users
   end
-  resources :posts
+  match 'posts/cancel_post' => 'posts#cancel_post', :as => :cancel_post
+  resources :posts do
+    member do
+      post :vote_on
+    end
+  end
   resources :subscriptions
   
   
   match '', to: 'users#index', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
-  #match 'people' => 'users#index', :as => :users
+  #match 'cancel_post' => 'post#cancel_post', :as => :cancel_post
   #match '/users/:id/vote_up' => 'users#vote_up', :as => :vote_up_user
   #match 'newsletter' => 'subscriptions#index', :as => :newsletter
   root :to => 'communities#index'

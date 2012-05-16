@@ -40,19 +40,4 @@ class UsersController < ApplicationController
       render "edit"
     end
   end
-  
-  #def vote_up
-  #  @user = User.find(params[:id])
-  #  if current_user.subscribed?
-  #    current_user.vote_for(@user)
-      #Pusher["presence-user-channel-#{@user.id}"].trigger('introduction-notice', {:first_name => @user.first_name, :genderize => genderself(@user)})
-      #UserMailer.delay.send_introduction(@user, current_user) unless @user == current_user
-  #    respond_to do |format|
-  #      #flash.now[:notice] = "You just introduced yourself to #{@user.first_name}."
-  #      format.js
-  #    end
-  #  else
-  #    redirect_to new_subscription_path(:referral => @user.id)
-  #  end
-  #end
 end
