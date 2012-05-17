@@ -16,6 +16,9 @@
 //= require isotope.min
 //= require chosen.min
 //= require users
+//= require posts
+//= require inboxes/discussions
+//= require subscriptions
 //= require timeago
 
 $(function() {
