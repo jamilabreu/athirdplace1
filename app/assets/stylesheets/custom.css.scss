@@ -166,7 +166,8 @@ input:focus, textarea:focus { @include box-shadow(0,0,0,0,rgba(0, 0, 0, 0.05));}
 .multiple_field label { position: relative; bottom: 11px; }
 #user_about { height: 90px; }
 
-.optional { width: 300px; margin: 10px 0 0 6px; border-bottom: 1px solid #EEE;  color: #BBB; }
+.search-choice-close { color: #EEE; }
+.optional { width: 300px; margin: 10px 0 0 6px; border-bottom: 1px solid #EEE;  color: #999; }
 
 .form-actions { margin: 18px 0 0 0; padding-left: 15px !important; }
 

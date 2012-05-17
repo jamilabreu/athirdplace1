@@ -7,34 +7,34 @@
 	
 		<% %W[ gender standing degree ].each do |name| %>
 			<div class="field <%= "hidden" if name == "gender" && current_user.gender.present? %>">
-				<label><%= name.titlecase %></label>
+				<label><%= name.titlecase %>*</label>
 				<%= f.collection_select("#{name}_ids".to_sym, Community.filtered_by("#{name}"), :id, :name, {:include_blank => true, :selected => current_user.communities.filtered_by("#{name}").blank? ? [5,11] : current_user.community_ids}, {'data-placeholder' => "Select #{name.titlecase}", :class => 'chzn-select', :id => "user_#{name}"}) %>
 			</div>
 		<% end %>
 		
 		<% %W[ school field ].each do |name| %>
 			<div class="field multiple_field">
-				<label><%= "#{name.titlecase}#{'(s)' unless name == 'ethnicity'}" %></label>
+				<label><%= "#{name.titlecase}(s)*" %></label>
 				<%= f.collection_select("#{name}_ids".to_sym, Community.filtered_by("#{name}"), :id, :name, {:include_blank => true, :selected => @community ? current_user.community_ids << @community.id : current_user.community_ids}, {'data-placeholder' => "Select #{name.titlecase}(s) #{'of Interest' if name == 'field'}", :class => 'chzn-select', :id => "user_#{name}", :multiple => true}) %>
 			</div>
 		<% end %>
 		<div class="optional">optional</div>
 		<div class="field">
 			<label>Current City</label>
-			<%= f.collection_select(:city_ids, Community.filtered_by("city"), :id, :city_and_country, {:include_blank => true, :selected => @community ? current_user.community_ids << @community.id : (current_user.communities.filtered_by("city").blank? ? nil : current_user.community_ids)}, {'data-placeholder' => "Select City", :class => 'chzn-select', :id => "user_city"}) %>
+			<%= f.collection_select(:city_ids, Community.filtered_by("city"), :id, :city_and_country, {:include_blank => true, :selected => @community ? current_user.community_ids << @community.id : (current_user.communities.filtered_by("city").blank? ? nil : current_user.community_ids)}, {'data-placeholder' => "Select City", :class => 'chzn-select-optional', :id => "user_city"}) %>
 		</div>
 		
 		<% %W[ relationship orientation religion ].each do |name| %>
 			<div class="field">
 				<label><%= name == 'relationship' ? "Status" : name.titlecase %></label>
-				<%= f.collection_select("#{name}_ids".to_sym, Community.filtered_by("#{name}").sort_by{|c| c.name}, :id, :name, {:include_blank => true, :selected => current_user.communities.filtered_by("#{name}").blank? ? [3,6] : current_user.community_ids}, {'data-placeholder' => "Select #{name.titlecase} #{'Status' if name == 'relationship'}", :class => 'chzn-select', :id => "user_#{name}"}) %>
+				<%= f.collection_select("#{name}_ids".to_sym, Community.filtered_by("#{name}").sort_by{|c| c.name}, :id, :name, {:include_blank => true, :selected => current_user.communities.filtered_by("#{name}").blank? ? [3,6] : current_user.community_ids}, {'data-placeholder' => "Select #{name.titlecase} #{'Status' if name == 'relationship'}", :class => 'chzn-select-optional', :id => "user_#{name}"}) %>
 			</div>
 		<% end %>
 		
 		<% %W[ ethnicity ].each do |name| %>
 			<div class="field multiple_field">
 				<label><%= "#{name.titlecase}#{'(s)' unless name == 'ethnicity'}" %></label>
-				<%= f.collection_select("#{name}_ids".to_sym, Community.filtered_by("#{name}"), :id, :name, {:include_blank => true, :selected => @community ? current_user.community_ids << @community.id : current_user.community_ids}, {'data-placeholder' => "Select #{name.titlecase}(s) #{'of Interest' if name == 'field'}", :class => 'chzn-select', :id => "user_#{name}", :multiple => true}) %>
+				<%= f.collection_select("#{name}_ids".to_sym, Community.filtered_by("#{name}"), :id, :name, {:include_blank => true, :selected => @community ? current_user.community_ids << @community.id : current_user.community_ids}, {'data-placeholder' => "Select #{name.titlecase}(s) #{'of Interest' if name == 'field'}", :class => 'chzn-select-optional', :id => "user_#{name}", :multiple => true}) %>
 			</div>
 		<% end %>
 		
