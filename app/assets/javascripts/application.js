@@ -18,7 +18,6 @@
 //= require users
 //= require posts
 //= require inboxes/discussions
-//= require subscriptions
 //= require timeago
 
 $(function() {
