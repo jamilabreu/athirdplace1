@@ -1,2 +1,6 @@
+$('#user_degree_<%= @user.id %>').html("<%= @user.degree.join %>");
+$('#user_school_<%= @user.id %>').html("<%= @user.school.join %>");
+$('#user_fields_<%= @user.id %>').html("<% @user.field.each do |f| %><div><%= f %></div><% end %>");
+$('#user_about_<%= @user.id %>').html("<%= @user.about if @user.about? %>");
 $('#user_profile_<%= @user.id %>').toggle();
 $('#users').isotope('reLayout');

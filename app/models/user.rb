@@ -13,22 +13,8 @@ class User < ActiveRecord::Base
   
   scope :filtered_by, lambda { |community_ids| joins(:community_users).where("community_users.community_id IN (?)", community_ids).uniq.compact }  
   
-  def sample_community(community_type)
-    array = communities.filtered_by(community_type)
-    array.sample.name if array.present? 
-  end
-  
-  def communities_count(community_type)
-    length = communities.filtered_by(community_type).length
-    "+#{length - 1}" if length > 1
-  end
-  
   def subscribed?
     Subscription.find_by_user_id(id).present? || created_at.advance(months: 1) > DateTime.now
-  end
-  
-  def unread_messages_count
-    
   end
   
   %W[ gender standing degree city field school ethnicity orientation religion relationship post_type ].each do |name|
@@ -64,7 +50,7 @@ class User < ActiveRecord::Base
         :image => access_token.info.image,
         :large_image => "http://graph.facebook.com/#{data.id}/picture?type=large",
         :profile_url => data.link,
-        :community_ids => data.gender.capitalize == "Male" ? ["1"] : ["2"]
+        :community_ids => data.gender.titleize == "Male" ? ["2"] : ["1"]
         )   
     end
   end

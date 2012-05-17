@@ -61,7 +61,7 @@ ethnicity.each do |key, value|
 end
 
 # 138 -140
-post_type = %W[ Announcement Event Link Image Video Question ]
+post_type = %W[ Announcement Event Link Question ]
 post_type.each do |post_type|
   Community.create(name: post_type, subdomain: post_type.parameterize.delete("-"), community_type: "Post Type")
 end
@@ -111,6 +111,6 @@ end
     body: Faker::Lorem.paragraph,
     user_id: Random.new.rand(1..50),
     community_ids: [Random.new.rand(1..2).to_s, Random.new.rand(3..5).to_s, Random.new.rand(6..13).to_s, Random.new.rand(14..56).to_s, 
-                    Random.new.rand(57..58).to_s, Random.new.rand(59..60).to_s, Random.new.rand(61..75).to_s, "88", Random.new.rand(138..143).to_s]
+                    Random.new.rand(57..58).to_s, Random.new.rand(59..60).to_s, Random.new.rand(61..75).to_s, "88", Random.new.rand(138..141).to_s]
   )
 end

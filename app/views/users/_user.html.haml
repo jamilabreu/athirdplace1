@@ -7,15 +7,13 @@
 				.user_standing= user.standing.join
 	.user_profile{:id => "user_profile_#{user.id}"}
 		.user_section
-			.user_degree= user.degree.join
-			.user_school= user.school.join
+			.user_degree{:id => "user_degree_#{user.id}"}
+			.user_school{:id => "user_school_#{user.id}"}
 		.user_section
-			.user_fields
-				- user.field.each do |field|
-					%div= field
+			.user_fields{:id => "user_fields_#{user.id}"}
 		- if user.about?
 			.user_section
-				.user_about= user.about
+				.user_about{:id => "user_about_#{user.id}"}
 		- unless user == current_user
 			.user_section
 				- if user_signed_in? && Discussion.find_between_users(user, current_user)

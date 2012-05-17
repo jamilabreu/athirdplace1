@@ -45,7 +45,7 @@ Athirdplace::Application.configure do
   :port => 587,
   :domain => "mail.athirdplace.com",
   :authentication => :login,
-  :user_name => "concierge@athirdplace.com",
+  :user_name => "conversations@athirdplace.com",
   :password => "helloeveryone11",
   }
 end

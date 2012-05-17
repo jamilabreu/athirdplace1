@@ -2,8 +2,8 @@ class Post < ActiveRecord::Base
   acts_as_voteable
   auto_html_for :body do
     html_escape
-    linked_image
-    youtube(:width => 192, :height => 144)
+    #linked_image
+    #youtube(:width => 192, :height => 144)
     link :target => "_blank", :rel => "nofollow"
     twitter
     simple_format

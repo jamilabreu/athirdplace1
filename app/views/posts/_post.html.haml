@@ -26,10 +26,6 @@
 					%i.icon-calendar
 				- elsif post.post_type.join == "Link"
 					%i.icon-external-link
-				- elsif post.post_type.join == "Image"
-					%i.icon-picture
-				- elsif post.post_type.join == "Video"
-					%i.icon-film
 				- elsif post.post_type.join == "Question"
 					%i.icon-question-sign	
 				%span{:id => "plusminus_#{post.id}"}
@@ -41,4 +37,5 @@
 					= link_to post.user.first_name, discussions_path(:id => post.user)
 				- else
 					= link_to post.user.first_name, new_discussion_path(:id => post.user), :remote => true
-				%abbr.timeago{:title => post.created_at.iso8601}
+				- if params[:newest]	
+					%abbr.timeago{:title => post.created_at.iso8601}

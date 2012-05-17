@@ -1,4 +1,5 @@
 jQuery ->
+	$('abbr.timeago').timeago();
 	$('#post_body').live 'focus', () ->
 		$('#post_body').css({height: '48px', border: '1px solid #BBB'});
 		$('#post_post_type_ids_chzn, #post-submit, .new-post-close, .new-post-bottom').show();
