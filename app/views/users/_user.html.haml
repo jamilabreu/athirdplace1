@@ -16,14 +16,7 @@
 				.user_about{:id => "user_about_#{user.id}"}
 		- unless user == current_user
 			.user_section
-				- if user_signed_in? && Discussion.find_between_users(user, current_user)
-					= link_to discussions_path(:id => user), :class => 'btn btn-conversation' do
-						%i.icon-comments
-						Continue Conversation
-				- else
-					= link_to new_discussion_path(:id => user), :class => 'btn btn-conversation', :remote => true do
-						%i.icon-comments
-						Start Conversation
+				.user_conversation{:id => "user_conversation_#{user.id}"}
 		- if user.twitter_name?
 			.user_section
 				= link_to "http://twitter.com/#{user.twitter_name}", :target => '_blank' do

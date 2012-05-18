@@ -8,7 +8,7 @@ jQuery ->
 	# Infinite Scroll
 	isScrolledIntoView = (elem) ->
 		docViewTop = $(window).scrollTop()
-		docViewBottom = docViewTop + $(window).height()
+		docViewBottom = docViewTop + $(window).height() + 800
 		elemTop = $(elem).offset().top
 		elemBottom = elemTop + $(elem).height()
 		(elemTop >= docViewTop) && (elemTop <= docViewBottom)

@@ -24,13 +24,13 @@ input:focus, textarea:focus { @include box-shadow(0,0,0,0,rgba(0, 0, 0, 0.05));}
 #wrap { background: url("big-fade.png") repeat-x; background-position: 0 -34px; }
 .container { padding-top: 54px; }
 .navbar .container { padding-top: 0; }
-.container, .navbar .container { width: 1020px; }
+.container, .navbar .container { width: 980px; }
 
 .section { border: 1px solid #D9D4D4; background: #FFF; @include border-radius(3px); @include box-shadow(0,1px,3px,0,rgba(0, 0, 0, 0.05)); }
 .edit_user, .subscription { padding: 15px; margin-right: 6px; }
 
 
-#users { margin-left: 6px; }
+#users { position: relative; left: 6px; }
 #posts { padding: 0; position: relative; }
 
 
@@ -48,11 +48,11 @@ input:focus, textarea:focus { @include box-shadow(0,0,0,0,rgba(0, 0, 0, 0.05));}
 /* Header */
 .navbar { border-bottom: 1px solid #FFF; height: 35px; }
 .navbar-inner { background: $black; height: 35px; }
-.navbar .nav > li > a { height: 27px; padding: 8px 20px 0; margin: 0; background: #484848; @include triple-gradient(#484848, #3d3d3d);}
+.navbar .nav > li > a { height: 27px; padding: 8px 20px 0; margin: 0; background: #484848; @include triple-gradient(#2f2f2f, $black);}
 .navbar .nav > li > a:hover { background: #484848; color: #FFF; }
 .navbar .nav > li > a i { line-height: 18px; font-size: 15px; }
-.navbar .nav > li > a.active { color: #FFF; background: $blue; @include triple-gradient($blue, #467fad); }
-.navbar .nav > li > a.active:hover { color: #FFF; background: $blue; @include triple-gradient($blue, #467fad); }
+.navbar .nav > li > a.active { color: #FFF; background: $blue; @include triple-gradient(#467fad, $blue); }
+.navbar .nav > li > a.active:hover { color: #FFF; background: $blue; @include triple-gradient(#467fad, $blue); }
 
 .navbar .nav > li > a.logo { color: #FFF; padding: 7px 15px 8px 0; margin: 0; background: transparent; border: 0; }
 .navbar .nav > li > a.logo:hover { background: transparent; color: #FFF; }
@@ -63,15 +63,25 @@ input:focus, textarea:focus { @include box-shadow(0,0,0,0,rgba(0, 0, 0, 0.05));}
 .navbar .divider-vertical { height: 35px; margin: 0 0 0 0; border: 0; background: #111; }
 
 .dropdown.open .dropdown-toggle { color: #999; }
+.dropdown a { padding: 8px 14px 0 !important; }
+.dropdown a:hover, .open.dropdown { background: transparent !important; }
+.dropdown i { margin-right: -2px !important; }
+.dropdown:hover i { color: #FFF; }
+.open.dropdown { background: transparent; }
+.open.dropdown i { color: #FFF; }
+
+/*
+.dropdown.open .dropdown-toggle { color: #999; }
 .dropdown a { background: transparent !important; border: 0 !important; padding: 8px 21px 0 20px !important; }
 .dropdown a:hover, .open.dropdown { background: transparent !important; }
 .dropdown i { margin-right: 0 !important; }
 .dropdown:hover i { color: #FFF; }
 .open.dropdown { background: transparent; }
 .open.dropdown i { color: #FFF; }
-
+*/
 .dropdown-menu { padding: 0; }
-.dropdown-menu a { background: $grey !important; font-weight: bold; padding: 8px 15px !important; margin: 2px; @include border-radius(2px); }
+.dropdown-menu a { background: transparent !important; font-weight: bold; padding: 8px 15px !important; }
+.dropdown-menu a, .dropdown-menu li a i { color: #777 !important; }
 .dropdown-menu a:hover { color: #FFF !important; background: $blue !important; }
 .dropdown-menu a:hover i { color: #FFF !important; }
 .dropdown-menu a i { color: $black !important; }
@@ -113,7 +123,7 @@ input:focus, textarea:focus { @include box-shadow(0,0,0,0,rgba(0, 0, 0, 0.05));}
 
 /* User */
 
-.user { width: 185px; padding: 2px 2px 0; margin: 0 6px 6px 0; background: #FFF; color: #999; border: 1px solid #D9D4D4; 
+.user { width: 185px; padding: 6px 6px 0; margin: 0 6px 6px 0; background: #FFF; color: #999; border: 1px solid #DDD; 
 				@include border-radius(3px); @include box-shadow(0,1px,3px,0,rgba(0, 0, 0, 0.05)); }
 .user img { width: 185px; @include custom-border-radius(2px,2px,0,0); }
 
@@ -172,8 +182,8 @@ input:focus, textarea:focus { @include box-shadow(0,0,0,0,rgba(0, 0, 0, 0.05));}
 .form-actions { margin: 18px 0 0 0; padding-left: 15px !important; }
 
 /* Conversations */
-.inbox { padding: 0 2px; }
-.inbox_item { background: $grey; margin: 2px 0; clear: both; color: #999; }
+.inbox { padding: 0 6px; }
+.inbox_item { background: $grey; margin: 6px 0; clear: both; color: #999; @include custom-border-radius(0,2px,2px,0);}
 .inbox_item:hover { background: #EAEAEA; }
 .inbox_item_image { float: left; margin-right: 10px; height: 40px; width: 40px; background: #FFF; border-right: 2px solid #FFF; }
 .inbox_item_image img { width: 40px; @include custom-border-radius(2px,0,0,2px); }

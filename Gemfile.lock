@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jabreu52/inboxes.git
-  revision: 0209241d4ecdfc25148c759ba5202be7beeabdea
+  revision: 5d5569d2f6f7966d19d2e1a5ec87f649c5a169ce
   specs:
     inboxes (0.2.2)
       cancan
@@ -75,6 +75,9 @@ GEM
     daemons (1.1.8)
     delayed_job (3.0.2)
       activesupport (~> 3.0)
+    delayed_job_active_record (0.3.2)
+      activerecord (> 2.1.0)
+      delayed_job (~> 3.0.0)
     devise (2.0.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -234,7 +237,7 @@ DEPENDENCIES
   cancan
   carmen
   coffee-rails (~> 3.2.1)
-  delayed_job
+  delayed_job_active_record
   devise
   faker
   font-awesome-sass-rails

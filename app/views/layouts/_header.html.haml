@@ -9,16 +9,22 @@
 			- if user_signed_in?
 				%span.right_nav
 					%ul.nav{:style => 'margin-right: 0'}
-						%li.divider-vertical
-						%li
-							= link_to posts_path, :class => posts_page ? "active" : nil do
-								%i.icon-align-justify
-								News
+						/
+							%li.divider-vertical
+							%li
+								= link_to posts_path, :class => posts_page ? "active" : nil do
+									%i.icon-align-justify
+									News
 						%li.divider-vertical
 						%li
 							= link_to root_url, :class => users_page ? "active" : nil do
 								%i.icon-user
 								People
+						%li.divider-vertical
+						%li
+							= link_to posts_path, :class => posts_page ? "active" : nil do
+								%i.icon-align-justify
+								Newsletter
 						%li.divider-vertical
 						%li{:id => 'nav-chats-button'}
 							= link_to discussions_path, :class => conversations_page ? "active" : nil do
@@ -41,3 +47,4 @@
 									= link_to logout_path do
 										%i.icon-off
 										Logout
+						%li.divider-vertical
