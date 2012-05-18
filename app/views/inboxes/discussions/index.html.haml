@@ -3,7 +3,7 @@
 		- if @discussion
 			- @discussions.each do |discussion|
 				= link_to discussion_path(discussion), :remote => true do
-					.inbox_item{:id => "inbox_item_#{discussion.partner(current_user).id}", :class => params[:id].present? && (params[:id].to_i == discussion.partner(current_user).id) || params[:id].blank? && (discussion == @discussions.first) ? 'active_inbox' : nil }
+					.inbox_item{:id => "inbox_item_#{discussion.partner(current_user).id}", :class => params[:id].present? && (params[:id].to_i == discussion.partner(current_user).id) || params[:id].blank? && (discussion == @discussions.first) ? 'active_inbox' : nil, :style => discussion == @discussions.last ? 'border-bottom: none' : nil }
 						.inbox_item_image= image_tag(discussion.partner(current_user).image)
 						.inbox_item_name
 							= discussion.partner(current_user).first_name
@@ -11,9 +11,15 @@
 								%i.icon-asterisk
 						%div{:style => "clear: both"}
 		- else
-			%i.icon-asterisk
-			No conversations available
+			.empty_inbox
+				%i.icon-asterisk
 .span9
 	.conversation.section
 		- if @discussion
 			= render :partial => 'inboxes/discussions/conversation', :locals => {:discussion => @discussion, :partner => @partner}
+		- else
+			.empty_conversation
+				%i.icon-comments
+				No Conversations Yet -
+				=link_to "Start One", users_path
+				

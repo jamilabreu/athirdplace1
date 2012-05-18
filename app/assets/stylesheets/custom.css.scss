@@ -182,15 +182,20 @@ input:focus, textarea:focus { @include box-shadow(0,0,0,0,rgba(0, 0, 0, 0.05));}
 .form-actions { margin: 18px 0 0 0; padding-left: 15px !important; }
 
 /* Conversations */
-.inbox { padding: 0 6px; }
-.inbox_item { background: $grey; margin: 6px 0; clear: both; color: #999; @include custom-border-radius(0,2px,2px,0);}
-.inbox_item:hover { background: #EAEAEA; }
+.inbox { padding: 0 5px; }
+.inbox_item { padding: 5px 0; clear: both; color: #808080; border-bottom: 1px solid #EEE; }
+.inbox_item:hover { color: $dkblue; }
 .inbox_item_image { float: left; margin-right: 10px; height: 40px; width: 40px; background: #FFF; border-right: 2px solid #FFF; }
 .inbox_item_image img { width: 40px; @include custom-border-radius(2px,0,0,2px); }
 .inbox_item_name { padding-top: 11px; }
 .inbox_item_name i { color: $blue; }
-.active_inbox { background: $blue; color: #FFF; }
-.active_inbox:hover { background: $blue; color: #FFF; }
+.active_inbox { color: $black; }
+.active_inbox:hover { color: $black; }
+	
+.empty_inbox { text-align: center; padding: 12px 0 5px; }
+.empty_inbox i { font-size: 22px; color: #999; }
+.empty_conversation { text-align: center; padding: 12px 0 5px; font-size: 18px; font-weight: bold; color: #999; }
+.empty_conversation i { font-size: 22px; line-height: 12px; margin-right: 3px; }
 	
 .conversation { padding: 15px 15px 20px; position: relative; }
 .conversation h1 { border-bottom: 1px solid #EEE; margin-bottom: 20px; height: 15px }
