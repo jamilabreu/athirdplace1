@@ -1,20 +1,25 @@
 class Post < ActiveRecord::Base
-  acts_as_voteable
+  #acts_as_voteable
   auto_html_for :body do
     html_escape
     #linked_image
-    #youtube(:width => 192, :height => 144)
+    #youtube(:width => 128, :height => 72)
     link :target => "_blank", :rel => "nofollow"
     twitter
     simple_format
   end  
   
+  belongs_to :user
   has_many :community_posts, :dependent => :destroy
   has_many :communities, :through => :community_posts
-  belongs_to :user
+
+  scope :filtered_by, lambda { |community_ids| joins(:community_posts).where("community_posts.community_id IN (?)", community_ids) }
   
-  scope :filtered_by, lambda { |community_ids| joins(:community_posts).where("community_posts.community_id IN (?)", community_ids).uniq.compact }
-  
+  has_reputation :votes,
+    :source => :user,
+    :aggregated_by => :sum,
+    :scopes => Community.all.map(&:subdomain).map(&:to_sym)
+
   %W[ post_type ].each do |name|
     define_method "#{name}" do
       self.communities.filtered_by("#{name}").map(&:name)

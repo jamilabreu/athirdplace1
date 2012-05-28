@@ -2,7 +2,7 @@ $('.conversation').html("<%= j render :partial => 'inboxes/discussions/conversat
 $('abbr.timeago').timeago();
 $("#message_body").focus();
 $(".active_inbox").removeClass("active_inbox");
-$("#inbox_item_<%= @discussion.partner(current_user).id %>").addClass("active_inbox");
+$("#inbox_item_<%= @discussion.partner(current_user).id %> .inbox_item_details").addClass("active_inbox");
 $("#inbox_item_<%= @discussion.partner(current_user).id %> i").remove();
 <% if @discussion.messages.length > 7 %>
 	$('.dialog').scrollTop($('.messages').height());

@@ -7,7 +7,7 @@ class Community < ActiveRecord::Base
 
   validates :name, :presence => true, :uniqueness => true
   
-  scope :filtered_by, lambda { |community_type| where( :community_type => community_type.titleize ) }
+  scope :filtered_by, lambda { |community_type| where( :community_type => community_type.to_s.titleize ) }
   
   def city_and_country
     "#{name}, #{country == 'United States' && region_code.present? ? region_code + ', USA' : country}"

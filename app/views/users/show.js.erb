@@ -1,11 +1,6 @@
-$('#user_degree_<%= @user.id %>').html("<%= @user.degree.join %>");
-$('#user_school_<%= @user.id %>').html("<%= @user.school.join %>");
-$('#user_fields_<%= @user.id %>').html("<% @user.field.each do |f| %><div><%= f %></div><% end %>");
-$('#user_about_<%= @user.id %>').html("<%= @user.about if @user.about? %>");
-<% if Discussion.find_between_users(@user, current_user) %>
-$('#user_conversation_<%= @user.id %>').html("<a href='/discussions?id=<%= @user.id %>' class='btn btn-conversation'><i class='icon-comments'></i>Continue Conversation</a>");
-<% else %>
-$('#user_conversation_<%= @user.id %>').html("<a href='/discussions/new?id=<%= @user.id %>' class='btn btn-conversation' data-remote='true'><i class='icon-comments'></i>Start Conversation</a>");
-<% end %>
+if ( !$('#user_profile_<%= @user.id %>').html().trim() ) {
+	$('#user_profile_<%= @user.id %>').html("<%= j render :partial => 'users/profile', :locals => { :user => @user } %>");
+}
 $('#user_profile_<%= @user.id %>').toggle();
+$('#user_image_<%= @user.id %> i:first').toggleClass('icon-chevron-down icon-chevron-up');
 $('#users').isotope('reLayout');

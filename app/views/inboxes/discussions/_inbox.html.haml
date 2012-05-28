@@ -1,0 +1,14 @@
+.inbox_item{:id => "inbox_item_#{discussion.partner(current_user).id}"}
+	= link_to discussion_path(discussion), :remote => true do
+		.inbox_item_image
+			= image_tag discussion.partner(current_user).image
+		.inbox_item_details{:class => params[:id].present? && (params[:id].to_i == discussion.partner(current_user).id) || params[:id].blank? && (discussion == @discussions.first) ? 'active_inbox' : nil }
+			.inbox_item_name
+				= discussion.partner(current_user).first_name
+			.inbox_item_message
+				= discussion.messages.last.body
+				- if discussion.unread_messages_count_for(current_user) > 0
+					%i.icon-asterisk
+
+
+			

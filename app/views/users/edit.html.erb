@@ -1,8 +1,11 @@
-<div class="offset3 span10">
+<div class="span3">
+	&nbsp;
+</div>
+<div class="span9">
 	<div class="section edit_user">
 		<%= content_tag :p, notice, :class => 'alert alert-block' if notice.present? %> 
 		<%= content_tag :p, alert, :class => 'alert alert-error' if alert.present? %>
-		<h2><%= image_tag @user.image, :class => "edit_user_image" %><span><%= @user.first_name %></span></h2>
+		<h2><%= image_tag @user.large_image, :class => "edit_user_image" %><span><%= @user.first_name %></span></h2>
 	<%= form_for @user, :html => { :class => "form-inline" } do |f| %>
 	
 		<% %W[ gender standing degree ].each do |name| %>

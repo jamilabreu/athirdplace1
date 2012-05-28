@@ -1,0 +1,10 @@
+.moderator
+	= link_to Discussion.find_between_users(user, current_user) ? discussions_path(:id => user) : new_discussion_path(:id => user), :remote => Discussion.find_between_users(user, current_user) ? false : true do
+		.moderator_image
+			= image_tag user.image
+		.moderator_details
+			.moderator_name
+				= user.name
+			.moderator_rating
+				%i.icon-star-empty
+				= user.reputation_value_for(:votes, @community.subdomain.to_sym)

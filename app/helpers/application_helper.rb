@@ -1,4 +1,24 @@
 module ApplicationHelper
+  def community_name
+    @community ? "#{@community.name} Student + Alumni Network" : "thirdplace"
+  end
+  
+  def voted_on?(object)
+    object.has_evaluation?(:votes, current_user, @community.subdomain.to_sym)
+  end
+  
+  def voted_for?(object)
+    object.evaluation_value(:votes, current_user, @community.subdomain.to_sym) > 0
+  end
+
+  def voted_against?(object)
+    object.evaluation_value(:votes, current_user, @community.subdomain.to_sym) < 0
+  end
+  
+  def vote_count(object)
+    object.reputation_value_for(:votes, @community.subdomain.to_sym).round
+  end
+    
   def home_page
     params[:controller] == "communities" && params[:action] == "index"
   end

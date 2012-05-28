@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
   has_inboxes
-  acts_as_voter
-  has_karma(:posts, :as => :user, :weight => 1)
+  #acts_as_voter
+  #has_karma(:posts, :as => :user, :weight => 1)
+  has_many :posts
   has_many :community_users, :dependent => :destroy
   has_many :communities, :through => :community_users
-  
+    
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation, :remember_me
   
@@ -12,7 +13,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :omniauthable
   
   scope :filtered_by, lambda { |community_ids| joins(:community_users).where("community_users.community_id IN (?)", community_ids).uniq.compact }  
-  
+   
+  has_reputation :votes,
+    :source => :user,
+    :aggregated_by => :sum,
+    :scopes => Community.all.map(&:subdomain).map(&:to_sym)
+
   def subscribed?
     Subscription.find_by_user_id(id).present? || created_at.advance(months: 1) > DateTime.now
   end

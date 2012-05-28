@@ -1,7 +1,6 @@
 Athirdplace::Application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :admin_users, ActiveAdmin::Devise.config
-
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_scope :user do
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
@@ -10,7 +9,11 @@ Athirdplace::Application.routes.draw do
     get "register", :to => "devise/registrations#new"
     get "edit", :to => "users#edit"
   end
-  resources :users
+  resources :users do
+    member do
+      post :vote_on
+    end
+  end
   resources :communities do
     resources :users
   end
@@ -26,7 +29,7 @@ Athirdplace::Application.routes.draw do
   match '', to: 'users#index', constraints: lambda { |r| r.subdomain.present? && r.subdomain != 'www' }
   #match 'cancel_post' => 'post#cancel_post', :as => :cancel_post
   #match '/users/:id/vote_up' => 'users#vote_up', :as => :vote_up_user
-  #match 'newsletter' => 'subscriptions#index', :as => :newsletter
+  match 'newsletter' => 'posts#index', :as => :newsletter
   root :to => 'communities#index'
   
   # The priority is based upon order of creation:

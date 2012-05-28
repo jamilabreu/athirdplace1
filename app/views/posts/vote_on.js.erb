@@ -1,8 +1,8 @@
-<% if current_user.voted_for?(@post) %>
+<% if voted_for?(@post) %>
 	$('#vote_up_<%= @post.id %>').addClass('post-voted');
 	$('#vote_down_<%= @post.id %>').removeClass('post-voted');
 <% else %>
 	$('#vote_up_<%= @post.id %>').removeClass('post-voted');
 	$('#vote_down_<%= @post.id %>').addClass('post-voted');
 <% end %>
-$('#plusminus_<%= @post.id %>').html("<%= pluralize(@post.plusminus, 'point') %>")
+$('#vote_count_<%= @post.id %>').html("<%= vote_count(@post) %>");

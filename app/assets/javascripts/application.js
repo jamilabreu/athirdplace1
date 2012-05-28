@@ -19,6 +19,7 @@
 //= require posts
 //= require inboxes/discussions
 //= require timeago
+//= require hovercard.min
 
 $(function() {
 	//$(".notice, .alert").fadeOut(10000);
@@ -26,4 +27,6 @@ $(function() {
 	//Chosen
 	$(".chzn-select").chosen();
 	$(".chzn-select-optional").chosen({allow_single_deselect: true});
+	
+	$(".hoverme").hovercard({ showFacebookCard: true, facebookUserName: true });
 });

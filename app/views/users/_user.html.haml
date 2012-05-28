@@ -1,29 +1,13 @@
 .user
 	= link_to user_path(user), :remote => true do
-		.user_image
+		.user_image{:id => "user_image_#{user.id}"}
+			.user_stats
+				%i.icon-chevron-down
+				.user_vouch_count{:id => "user_vouch_count_#{user.id}"}
+					%i.icon-star-empty
+					%span= user.reputation_value_for(:votes, @community.subdomain.to_sym).round if @community
 			= image_tag user.large_image, :title => user.name
 			.user_preview
 				.user_name= user.first_name
 				.user_standing= user.standing.join
-	.user_profile{:id => "user_profile_#{user.id}"}
-		.user_section
-			.user_degree{:id => "user_degree_#{user.id}"}
-			.user_school{:id => "user_school_#{user.id}"}
-		.user_section
-			.user_fields{:id => "user_fields_#{user.id}"}
-		- if user.about?
-			.user_section
-				.user_about{:id => "user_about_#{user.id}"}
-		- unless user == current_user
-			.user_section
-				.user_conversation{:id => "user_conversation_#{user.id}"}
-		- if user.twitter_name?
-			.user_section
-				= link_to "http://twitter.com/#{user.twitter_name}", :target => '_blank' do
-					%i.icon-twitter-sign
-					= user.twitter_name
-		- if user.blog_url?
-			.user_section
-				= link_to user.blog_url, :target => '_blank' do
-					%i.icon-external-link
-					blog
+	.user_profile{:id => "user_profile_#{user.id}"} 

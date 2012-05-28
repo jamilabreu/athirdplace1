@@ -1,0 +1,45 @@
+.user_section
+	.user_degree{:id => "user_degree_#{user.id}"}
+		= user.degree.join
+	.user_school{:id => "user_school_#{user.id}"}
+		- user.school.each do |s|
+			%div= s
+.user_section
+	.user_fields{:id => "user_fields_#{user.id}"}
+		- user.field.each do |f|
+			%div= f
+- if user.about?
+	.user_section
+		.user_about{:id => "user_about_#{user.id}"}
+			= user.about
+- unless user == current_user			
+	.user_section{:style => 'padding: 3px 0'}
+		.user_actions
+			.user_conversation_holder
+				.user_conversation{:id => "user_conversation_#{user.id}"}
+					- if Discussion.find_between_users(user, current_user)
+						= link_to discussions_path(:id => user) do
+							%i.icon-comments
+					- else
+						= link_to new_discussion_path(:id => user), :remote => true do
+							%i.icon-comments
+			.user_vouch_holder
+				.user_vouch{:id => "user_vouch_#{user.id}"}
+					- if user.has_evaluation?(:votes, current_user, @community.subdomain.to_sym)
+						= link_to vote_on_user_path(:up => false), :method => :post, :remote => true do
+							%i.icon-star.vouched
+					- else
+						= link_to vote_on_user_path(:up => true), :method => :post, :remote => true do
+							%i.icon-star-empty
+- if user.twitter_name?
+	.user_section
+		.user_twitter{:id => "user_twitter_#{user.id}"}
+			= link_to "http://twitter.com/#{user.twitter_name}", :target => "_blank" do
+				%i.icon-twitter-sign
+				= user.twitter_name
+- if user.blog_url?
+	.user_section
+		.user_blog{:id => "user_blog_#{user.id}"}
+			= link_to user.blog_url, :target => "_blank" do
+				%i.icon-external-link
+				blog

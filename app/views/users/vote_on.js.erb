@@ -1,0 +1,7 @@
+<% if voted_on?(@user) %>
+	$('#user_vouch_<%= @user.id %>').html("<a href='/users/<%= @user.id %>/vote_on?up=false' data-method='post' data-remote='true' rel='nofollow'><i class='icon-star vouched'></i></a>");
+<% else %>
+	$('#user_vouch_<%= @user.id %>').html("<a href='/users/<%= @user.id %>/vote_on?up=true' data-method='post' data-remote='true' rel='nofollow'><i class='icon-star-empty'></i></a>");
+<% end %>
+$('#user_vouch_count_<%= @user.id %>').html("<i class='icon-star-empty'></i><span><%= @user.reputation_value_for(:votes, @community.subdomain.to_sym).round %></span>");
+	

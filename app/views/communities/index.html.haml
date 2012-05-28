@@ -1,0 +1,7 @@
+.span13
+	#directory
+		%h1
+			"a third place" n. - an informal meeting space for building community.
+		.section
+			- @communities.each do |community|
+				= link_to community.name, root_url(subdomain: community.subdomain)

@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     else
       filtered_users = community_users
     end
-    @users = Kaminari.paginate_array(filtered_users.shuffle).page(params[:page]).per(15)
+    @users = Kaminari.paginate_array(filtered_users).page(params[:page]).per(15)
     
     # Filters
     users_community_ids = filtered_users.map(&:community_ids).flatten.uniq.compact.delete_if { |id| id == @community.id || id == @community.parent_id }
@@ -40,4 +40,17 @@ class UsersController < ApplicationController
       render "edit"
     end
   end
+
+  def vote_on
+    @user = User.find(params[:id])
+    community = @community.subdomain.to_sym
+    if params[:up] == "true"
+      @user.add_evaluation(:votes, 1, current_user, community)
+    else
+      @user.delete_evaluation(:votes, current_user, community)
+    end
+    respond_to do |format|
+      format.js
+    end
+  end  
 end
