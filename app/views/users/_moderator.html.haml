@@ -7,4 +7,4 @@
 				= user.name
 			.moderator_rating
 				%i.icon-star-empty
-				= user.reputation_value_for(:votes, @community.subdomain.to_sym)
+				= user.reputation_value_for(:votes, @community.subdomain.to_sym).round

@@ -1,9 +1,12 @@
+%h3.title
+	Filters
+	- if params[:ids].present?
+		%span
+			[
+			= link_to "reset", root_url
+			]
 .left_column_holder.section
 	.left_column
-		.filter_title Filters
-		%ul
-			.filter
-				= link_to "All", root_url
 		- @filters.each do |key, value|
 			- if value.present?
 				.filter_title= key.titleize
